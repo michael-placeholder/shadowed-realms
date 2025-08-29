@@ -4,165 +4,299 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shadowed Realms - Development Dashboard</title>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/fromsoft-theme.css">
     <style>
-        .loading { color: #d4af37; }
-        .error { color: #8b0000; }
-        #real-stats { 
-            background: #1a1a1a; 
-            padding: 20px; 
-            border-radius: 8px; 
+        /* Bonfire animation */
+        .bonfire {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ff6b35, #ff9500, transparent);
+            border-radius: 50%;
+            animation: flicker 1.5s infinite;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        /* Loading souls animation */
+        .soul-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #d4af37;
+            animation: float 3s ease-in-out infinite;
+            z-index: 1000;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Boss health bar style for sprint progress */
+        .boss-bar {
+            position: relative;
+            height: 40px;
+            background: linear-gradient(180deg, #1a1a1a, #0a0a0a);
+            border: 3px solid #4a4a4a;
             margin: 20px 0;
-            border: 1px solid #3a3a3a;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
         }
-        .stat-row { 
-            display: flex; 
-            justify-content: space-between; 
-            margin: 10px 0;
-            padding: 10px;
-            background: #0a0a0a;
-            border-radius: 4px;
+        
+        .boss-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8b0000, #ff6b35, #d4af37);
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
-        .stat-label { color: #888; }
-        .stat-value { 
-            color: #d4af37; 
-            font-weight: bold; 
-            font-size: 1.2em;
+        
+        .boss-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -200%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: sweep 3s infinite;
+        }
+        
+        @keyframes sweep {
+            0% { left: -200%; }
+            100% { left: 200%; }
+        }
+        
+        /* Estus flask counter */
+        .estus-counter {
+            display: flex;
+            gap: 5px;
+            margin: 20px 0;
+        }
+        
+        .estus-flask {
+            width: 30px;
+            height: 40px;
+            background: linear-gradient(180deg, #2d5016, #3a6b1e);
+            border: 2px solid #4a4a4a;
+            border-radius: 40% 40% 50% 50%;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .estus-flask.used {
+            opacity: 0.3;
+            background: #2a2a2a;
+        }
+        
+        .estus-flask::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 4px;
+            background: #d4af37;
+            border-radius: 2px;
         }
     </style>
 </head>
 <body>
+    <!-- Bonfire checkpoint -->
+    <div class="bonfire" title="Rest at bonfire"></div>
+    
+    <!-- Soul counter -->
+    <div class="soul-counter">
+        <span id="total-souls">0</span> SOULS
+    </div>
+    
     <div class="dashboard-container">
         <header class="dashboard-header">
             <h1 class="game-title">SHADOWED REALMS</h1>
-            <p class="subtitle">Development Dashboard</p>
+            <p class="subtitle">The Ashen Dashboard</p>
         </header>
 
+        <!-- Player Stats -->
         <div class="stats-container">
             <div class="stat-card">
-                <div class="stat-label">LEVEL</div>
+                <div class="stat-label">SOUL LEVEL</div>
                 <div class="stat-value" id="user-level">1</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">XP</div>
+                <div class="stat-label">SOULS ACQUIRED</div>
                 <div class="stat-value" id="user-xp">0</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">COINS</div>
+                <div class="stat-label">GOLD EARNED</div>
                 <div class="stat-value" id="user-coins">0</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">MEMORY</div>
+                <div class="stat-label">MEMORIES</div>
                 <div class="stat-value" id="memory-count">0/49</div>
             </div>
         </div>
 
+        <!-- Repository Stats -->
         <div id="real-stats">
-            <h2>Live Repository Stats</h2>
+            <h2>⚔️ Repository Chronicles ⚔️</h2>
             <div class="stat-row">
-                <span class="stat-label">Total Issues:</span>
-                <span class="stat-value" id="total-issues">Loading...</span>
+                <span class="stat-label">Total Quests:</span>
+                <span class="stat-value" id="total-issues">Kindling...</span>
             </div>
             <div class="stat-row">
-                <span class="stat-label">Open Issues:</span>
-                <span class="stat-value" id="open-issues">Loading...</span>
+                <span class="stat-label">Active Quests:</span>
+                <span class="stat-value" id="open-issues">Kindling...</span>
             </div>
             <div class="stat-row">
-                <span class="stat-label">Total XP Available:</span>
-                <span class="stat-value" id="total-xp-available">Loading...</span>
+                <span class="stat-label">Available Souls:</span>
+                <span class="stat-value" id="total-xp-available">Kindling...</span>
             </div>
             <div class="stat-row">
-                <span class="stat-label">Total Coins Available:</span>
-                <span class="stat-value" id="total-coins-available">Loading...</span>
+                <span class="stat-label">Gold in Treasury:</span>
+                <span class="stat-value" id="total-coins-available">Kindling...</span>
             </div>
             <div class="stat-row">
-                <span class="stat-label">Memory Fragments:</span>
-                <span class="stat-value" id="memory-fragments">Loading...</span>
+                <span class="stat-label">Memory Shards:</span>
+                <span class="stat-value" id="memory-fragments">Kindling...</span>
             </div>
             <div class="stat-row">
-                <span class="stat-label">Epics:</span>
-                <span class="stat-value" id="epic-count">Loading...</span>
+                <span class="stat-label">Epic Battles:</span>
+                <span class="stat-value" id="epic-count">Kindling...</span>
             </div>
             <div class="stat-row">
-                <span class="stat-label">TCG Cards:</span>
-                <span class="stat-value" id="tcg-count">Loading...</span>
+                <span class="stat-label">TCG Artifacts:</span>
+                <span class="stat-value" id="tcg-count">Kindling...</span>
             </div>
             <div class="stat-row">
-                <span class="stat-label">Last Updated:</span>
-                <span class="stat-value" id="last-updated">Loading...</span>
+                <span class="stat-label">Last Bonfire:</span>
+                <span class="stat-value" id="last-updated">Never rested</span>
             </div>
         </div>
 
+        <!-- Sprint Progress - Boss Bar Style -->
         <div class="sprint-container">
-            <h2>Current Sprint: Sprint 1 - Foundation</h2>
-            <div class="progress-bar">
-                <div class="progress-fill" id="sprint-progress" style="width: 0%"></div>
+            <h2>⚔️ Sprint 1 - The Foundation ⚔️</h2>
+            <div class="boss-bar">
+                <div class="boss-bar-fill" id="sprint-progress" style="width: 0%"></div>
             </div>
             <div class="sprint-stats">
-                <span id="tasks-complete">0</span>/<span id="tasks-total">0</span> Tasks
+                <span id="tasks-complete">0</span>/<span id="tasks-total">3000</span> Quests Completed
+            </div>
+            
+            <!-- Estus Flask Counter (represents daily tasks) -->
+            <div class="estus-counter" id="estus-counter">
+                <!-- Will be populated by JavaScript -->
             </div>
         </div>
 
+        <!-- Task List -->
         <div class="task-container">
-            <h2>Available Tasks</h2>
+            <h2>⚔️ Available Quests ⚔️</h2>
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">ALL</button>
-                <button class="filter-btn" data-filter="epic">EPICS</button>
+                <button class="filter-btn active" data-filter="all">ALL QUESTS</button>
+                <button class="filter-btn" data-filter="epic">EPIC BATTLES</button>
                 <button class="filter-btn" data-filter="user-story">STORIES</button>
                 <button class="filter-btn" data-filter="task">TASKS</button>
-                <button class="filter-btn" data-filter="issue">ISSUES</button>
-                <button class="filter-btn" data-filter="memory-fragment">MEMORY</button>
-                <button class="filter-btn" data-filter="tcg">TCG</button>
+                <button class="filter-btn" data-filter="issue">MICRO-QUESTS</button>
+                <button class="filter-btn" data-filter="memory-fragment">MEMORIES</button>
+                <button class="filter-btn" data-filter="tcg">ARTIFACTS</button>
             </div>
             <div id="task-list" class="task-list">
-                <div class="loading">Loading issues from GitHub...</div>
+                <div class="loading">Kindling the First Flame...</div>
             </div>
         </div>
 
+        <!-- Memory Fragments -->
         <div class="memory-container">
-            <h2>Memory Fragments</h2>
-            <div id="memory-grid" class="memory-grid"></div>
+            <h2>⚔️ Memory Fragments ⚔️</h2>
+            <div id="memory-grid" class="memory-grid">
+                <!-- Will be populated with 49 memory slots -->
+            </div>
         </div>
 
+        <!-- GitHub Connection -->
         <div class="github-section">
-            <h2>GitHub Integration</h2>
+            <h2>⚔️ Covenant Links ⚔️</h2>
             <div class="github-stats">
                 <p>Repository: <a href="https://github.com/michael-placeholder/shadowed-realms" target="_blank">shadowed-realms</a></p>
                 <p>Project Board: <a href="https://github.com/orgs/michael-placeholder/projects/1" target="_blank">View Board</a></p>
-                <p>Status: <span id="github-status" class="status-online">Connected</span></p>
+                <p>Status: <span id="github-status" class="status-online">Bonfire Lit</span></p>
             </div>
         </div>
     </div>
 
     <script>
-        // Real-time issue fetching
+        // Initialize memory grid
+        function initMemoryGrid() {
+            const grid = document.getElementById('memory-grid');
+            for (let i = 1; i <= 49; i++) {
+                const fragment = document.createElement('div');
+                fragment.className = 'memory-fragment';
+                fragment.id = `memory-${i}`;
+                fragment.textContent = '?';
+                fragment.title = `Memory Fragment ${i} - Locked`;
+                grid.appendChild(fragment);
+            }
+        }
+        
+        // Initialize Estus flasks (daily task tracker)
+        function initEstusFlasks() {
+            const container = document.getElementById('estus-counter');
+            container.innerHTML = '<p style="color: #888; margin-right: 10px;">Daily Estus:</p>';
+            for (let i = 0; i < 10; i++) {
+                const flask = document.createElement('div');
+                flask.className = 'estus-flask';
+                flask.title = `Estus Flask ${i + 1}`;
+                container.appendChild(flask);
+            }
+        }
+        
+        // Fetch real GitHub issues
         async function fetchRealIssues() {
             const repo = 'michael-placeholder/shadowed-realms';
             const container = document.getElementById('task-list');
             
             try {
-                // Fetch all issues (up to 100 per page)
-                const response = await fetch(`https://api.github.com/repos/${repo}/issues?state=all&per_page=100`);
+                // Fetch issues with pagination support
+                let allIssues = [];
+                let page = 1;
+                let hasMore = true;
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
+                while (hasMore && page <= 3) { // Limit to 3 pages to avoid rate limits
+                    const response = await fetch(`https://api.github.com/repos/${repo}/issues?state=all&per_page=100&page=${page}`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    
+                    const issues = await response.json();
+                    allIssues = [...allIssues, ...issues];
+                    hasMore = issues.length === 100;
+                    page++;
                 }
                 
-                const issues = await response.json();
-                
                 // Update stats
-                document.getElementById('total-issues').textContent = issues.length;
-                document.getElementById('open-issues').textContent = issues.filter(i => i.state === 'open').length;
+                document.getElementById('total-issues').textContent = allIssues.length;
+                document.getElementById('open-issues').textContent = allIssues.filter(i => i.state === 'open').length;
                 
-                // Calculate XP and coins
+                // Calculate totals
                 let totalXP = 0;
                 let totalCoins = 0;
                 let epicCount = 0;
                 let memoryCount = 0;
                 let tcgCount = 0;
                 
-                issues.forEach(issue => {
+                allIssues.forEach(issue => {
                     issue.labels.forEach(label => {
                         if (label.name.startsWith('xp-')) {
                             totalXP += parseInt(label.name.replace('xp-', ''));
@@ -176,39 +310,76 @@
                     });
                 });
                 
+                // Update soul counter
+                document.getElementById('total-souls').textContent = totalXP.toLocaleString();
                 document.getElementById('total-xp-available').textContent = totalXP.toLocaleString();
                 document.getElementById('total-coins-available').textContent = totalCoins.toLocaleString();
                 document.getElementById('epic-count').textContent = epicCount;
-                document.getElementById('memory-fragments').textContent = memoryCount;
+                document.getElementById('memory-fragments').textContent = `${memoryCount}/49`;
                 document.getElementById('tcg-count').textContent = tcgCount;
                 document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
                 
+                // Unlock memory fragments
+                for (let i = 1; i <= memoryCount && i <= 49; i++) {
+                    const fragment = document.getElementById(`memory-${i}`);
+                    if (fragment) {
+                        fragment.classList.add('unlocked');
+                        fragment.textContent = '✦';
+                        fragment.title = `Memory Fragment ${i} - Unlocked`;
+                    }
+                }
+                
                 // Display issues
-                if (issues.length > 0) {
+                if (allIssues.length > 0) {
                     container.innerHTML = '';
-                    issues.slice(0, 50).forEach(issue => {
+                    
+                    // Sort issues: epics first, then by XP value
+                    allIssues.sort((a, b) => {
+                        const aIsEpic = a.labels.some(l => l.name === 'epic');
+                        const bIsEpic = b.labels.some(l => l.name === 'epic');
+                        if (aIsEpic && !bIsEpic) return -1;
+                        if (!aIsEpic && bIsEpic) return 1;
+                        
+                        const aXP = a.labels.find(l => l.name.startsWith('xp-'));
+                        const bXP = b.labels.find(l => l.name.startsWith('xp-'));
+                        const aValue = aXP ? parseInt(aXP.name.replace('xp-', '')) : 0;
+                        const bValue = bXP ? parseInt(bXP.name.replace('xp-', '')) : 0;
+                        return bValue - aValue;
+                    });
+                    
+                    allIssues.slice(0, 100).forEach(issue => {
                         const card = createIssueCard(issue);
                         container.appendChild(card);
                     });
                     
-                    if (issues.length > 50) {
-                        container.innerHTML += `<p style="text-align: center; color: #888;">Showing 50 of ${issues.length} issues</p>`;
+                    if (allIssues.length > 100) {
+                        container.innerHTML += `<p style="text-align: center; color: #888; margin-top: 20px;">Showing 100 of ${allIssues.length} quests</p>`;
                     }
                 } else {
-                    container.innerHTML = '<p>No issues found</p>';
+                    container.innerHTML = '<p>No quests found. The fire fades...</p>';
                 }
                 
                 // Update sprint progress
-                const closedCount = issues.filter(i => i.state === 'closed').length;
+                const closedCount = allIssues.filter(i => i.state === 'closed').length;
                 document.getElementById('tasks-complete').textContent = closedCount;
-                document.getElementById('tasks-total').textContent = issues.length;
-                const progress = issues.length > 0 ? (closedCount / issues.length * 100) : 0;
+                document.getElementById('tasks-total').textContent = '3000';
+                const progress = (closedCount / 3000 * 100);
                 document.getElementById('sprint-progress').style.width = progress + '%';
+                
+                // Update Estus flasks based on daily progress
+                const dailyGoal = 10;
+                const todaysClosed = Math.min(closedCount, dailyGoal);
+                const flasks = document.querySelectorAll('.estus-flask');
+                flasks.forEach((flask, i) => {
+                    if (i >= todaysClosed) {
+                        flask.classList.add('used');
+                    }
+                });
                 
             } catch (error) {
                 console.error('Error fetching issues:', error);
-                container.innerHTML = `<div class="error">Error: ${error.message}. This may be due to rate limiting. The API allows 60 requests/hour for unauthenticated requests.</div>`;
-                document.getElementById('github-status').textContent = 'Rate Limited';
+                container.innerHTML = `<div class="error">Connection to GitHub lost. Error: ${error.message}</div>`;
+                document.getElementById('github-status').textContent = 'Connection Lost';
                 document.getElementById('github-status').className = 'status-error';
             }
         }
@@ -216,7 +387,24 @@
         function createIssueCard(issue) {
             const card = document.createElement('div');
             card.className = 'task-card';
-            card.dataset.labels = issue.labels.map(l => l.name).join(' ');
+            
+            // Extract labels for filtering
+            const labelNames = issue.labels.map(l => l.name).join(' ');
+            card.dataset.labels = labelNames;
+            
+            // Determine if it's an epic, memory, or regular task
+            const isEpic = issue.labels.some(l => l.name === 'epic');
+            const isMemory = issue.labels.some(l => l.name === 'memory-fragment');
+            const isTCG = issue.labels.some(l => l.name === 'tcg');
+            
+            if (isEpic) {
+                card.style.borderColor = '#d4af37';
+                card.style.background = 'linear-gradient(135deg, rgba(212,175,55,0.1), rgba(26,26,26,0.9))';
+            } else if (isMemory) {
+                card.style.borderColor = '#ff6b35';
+            } else if (isTCG) {
+                card.style.borderColor = '#9b59b6';
+            }
             
             let xp = 0;
             let coins = 0;
@@ -232,18 +420,18 @@
             card.innerHTML = `
                 <div class="task-header">
                     <span class="task-number">#${issue.number}</span>
-                    <span class="task-state ${issue.state}">${issue.state}</span>
+                    <span class="task-state ${issue.state}">${issue.state === 'open' ? 'ACTIVE' : 'COMPLETE'}</span>
                 </div>
                 <h4 class="task-title">${issue.title}</h4>
                 <div class="task-rewards">
-                    ${xp > 0 ? `<span class="xp-reward">🌟 ${xp} XP</span>` : ''}
-                    ${coins > 0 ? `<span class="coin-reward">🪙 ${coins} coins</span>` : ''}
+                    ${xp > 0 ? `<span class="xp-reward">⚡ ${xp} SOULS</span>` : ''}
+                    ${coins > 0 ? `<span class="coin-reward">💰 ${coins} GOLD</span>` : ''}
                 </div>
                 <div class="task-labels">
                     ${issue.labels.map(l => `<span class="label" style="background-color: #${l.color}">${l.name}</span>`).join('')}
                 </div>
                 <div class="task-actions">
-                    <a href="${issue.html_url}" target="_blank" class="btn-view">View on GitHub</a>
+                    <a href="${issue.html_url}" target="_blank" class="btn-view">EMBARK</a>
                 </div>
             `;
             
@@ -269,11 +457,23 @@
             });
         });
         
-        // Load issues on page load
+        // Bonfire save point
+        document.querySelector('.bonfire').addEventListener('click', () => {
+            localStorage.setItem('lastCheckpoint', new Date().toISOString());
+            document.querySelector('.bonfire').style.animation = 'flicker 0.5s 3';
+            setTimeout(() => {
+                document.querySelector('.bonfire').style.animation = 'flicker 1.5s infinite';
+            }, 1500);
+            fetchRealIssues(); // Refresh data
+        });
+        
+        // Initialize
+        initMemoryGrid();
+        initEstusFlasks();
         fetchRealIssues();
         
-        // Refresh every 60 seconds to avoid rate limits
-        setInterval(fetchRealIssues, 60000);
+        // Auto-refresh every 2 minutes
+        setInterval(fetchRealIssues, 120000);
     </script>
 </body>
 </html>
