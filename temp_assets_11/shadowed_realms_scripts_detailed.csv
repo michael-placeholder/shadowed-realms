@@ -1,0 +1,51 @@
+Asset/Script Name,Category,Complexity Level,Development Hours,Unity Store Price,Unreal Marketplace,Direct Sales (Gumroad),Monthly Sales Est
+Complete RPG Framework,Core Framework,High,120,200,225,175,3
+Anime Character Controller,Character,High,80,75,85,65,5
+Combat System with Combos,Combat,High,100,125,140,115,4
+Dialogue & Quest System,Narrative,High,90,95,105,85,3
+Inventory & Equipment Manager,Inventory,Medium,60,45,50,40,8
+Skill Tree & Progression System,Progression,High,100,150,170,135,2
+Save/Load Game Manager,Data,Medium,40,35,40,30,6
+Audio Manager with Dynamic Music,Audio,Medium,50,40,45,35,5
+Scene Transition Manager,Scene,Low,20,25,30,20,4
+Settings & Options Menu System,UI,Medium,40,35,40,30,6
+Maya-Unity Batch Importer,Pipeline,High,60,85,95,75,2
+Animation Controller Generator,Animation,High,70,95,105,85,3
+Automated Rigging Tools,Rigging,High,80,120,135,110,2
+Texture Optimization Scripts,Textures,Medium,30,30,35,25,4
+LOD Generator & Manager,Optimization,High,90,110,125,100,2
+Asset Bundle Manager,Deployment,Medium,40,45,50,40,3
+Performance Profiler Tools,Performance,High,80,95,105,85,2
+Automated Build Pipeline,Build,High,70,85,95,75,2
+Version Control Integration,VCS,Medium,30,35,40,30,3
+Database Schema Generator,Database,High,90,125,140,115,1
+Anime-Style Toon Shader Pack,Shaders,Medium,40,50,55,45,6
+Particle Effect Library,VFX,Medium,50,40,45,35,5
+Weather System Controller,Environment,High,80,95,105,85,3
+Day/Night Cycle Manager,Environment,High,70,85,95,75,3
+Lighting Presets System,Lighting,Medium,30,35,40,30,5
+Post-Processing Stack Setup,Rendering,Low,20,25,30,20,8
+UI Animation System,UI,Medium,40,45,50,40,4
+Screen Space Effects Pack,VFX,Medium,30,35,40,30,6
+Procedural Sky System,Environment,High,60,75,85,65,2
+Water Shader & Physics,Physics,High,70,85,95,75,3
+NPC Behavior Tree System,AI,High,100,125,140,115,2
+Enemy AI Controller,AI,High,80,95,105,85,3
+Crowd Simulation Manager,AI,High,90,110,125,100,2
+Pathfinding Optimization,AI,High,70,85,95,75,3
+State Machine Framework,Programming,Medium,50,55,60,45,4
+Event System Manager,Programming,Medium,30,35,40,30,5
+Random Dungeon Generator,Procedural,High,100,150,170,135,1
+Loot Table System,Gameplay,Medium,40,45,50,40,4
+Achievement System,Gameplay,Low,20,25,30,20,8
+Analytics Integration Tools,Analytics,Medium,40,50,55,45,3
+Responsive UI Framework,UI,Medium,50,55,60,45,4
+Mobile Input Handler,Input,Medium,40,45,50,40,5
+Accessibility Tools,Accessibility,Medium,30,35,40,30,6
+Localization Manager,Localization,High,60,75,85,65,2
+UI Theme System,UI,Low,20,25,30,20,8
+Menu Navigation Controller,UI,Low,20,25,30,20,6
+Tooltip System,UI,Low,15,20,25,15,10
+Health Bar & UI Effects,UI,Low,15,20,25,15,12
+Mini-Map System,UI,Medium,40,45,50,40,3
+Chat/Communication System,Social,Medium,30,35,40,30,4

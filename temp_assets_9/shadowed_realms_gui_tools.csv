@@ -1,0 +1,21 @@
+Tool Name,Category,Unity Price,Monthly Sales,Dev Hours,Base Script Included
+RPG Manager Pro (Visual Interface),Core Systems,250,2,150,Yes
+Combat Designer (No-Code),Combat,180,3,120,Yes
+Quest Builder Visual Editor,Narrative,150,4,100,Yes
+Dialogue System Designer,Narrative,125,4,80,Yes
+Inventory Manager GUI,Inventory,95,6,60,Yes
+Character Creator Pro,Character,140,3,100,Yes
+Animation Controller Designer,Animation,110,3,70,Yes
+Audio Manager Visual,Audio,85,4,50,Yes
+UI Builder Pro,UI,120,5,80,Yes
+Scene Manager Visual,Scene,75,5,40,Yes
+Asset Pipeline Manager,Pipeline,160,2,120,Yes
+Build Automation Suite,Build,140,2,100,Yes
+Performance Optimizer GUI,Performance,120,3,80,Yes
+Debug Console Pro,Debug,95,5,60,Yes
+Version Control Manager,VCS,110,3,70,Yes
+Database Designer Visual,Database,135,2,100,Yes
+Localization Manager Pro,Localization,105,3,60,Yes
+Analytics Dashboard,Analytics,85,4,50,Yes
+Testing Suite Manager,Testing,75,4,40,Yes
+Documentation Generator,Documentation,65,3,30,Yes

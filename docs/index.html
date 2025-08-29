@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadowed Realms - Development Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/fromsoft-theme.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="logo">
+                <h1>SHADOWED REALMS</h1>
+                <span class="subtitle">Development Dashboard</span>
+            </div>
+            <div class="player-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value" id="player-level">1</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">XP</span>
+                    <span class="stat-value" id="player-xp">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Coins</span>
+                    <span class="stat-value" id="player-coins">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Memory</span>
+                    <span class="stat-value" id="memory-fragments">0/49</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sprint Progress -->
+        <section class="sprint-progress">
+            <h2>Current Sprint: <span id="current-sprint">Sprint 1 - Foundation</span></h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="sprint-progress"></div>
+                <span class="progress-text">0/1666 Tasks</span>
+            </div>
+            <div class="sprint-stats">
+                <div class="sprint-stat">
+                    <span>Epics Complete</span>
+                    <span id="epics-complete">0/8</span>
+                </div>
+                <div class="sprint-stat">
+                    <span>Stories Complete</span>
+                    <span id="stories-complete">0/32</span>
+                </div>
+                <div class="sprint-stat">
+                    <span>Assets Created</span>
+                    <span id="assets-created">0/1666</span>
+                </div>
+                <div class="sprint-stat">
+                    <span>Revenue Generated</span>
+                    <span id="revenue-generated">$0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Task Picker -->
+        <section class="task-picker">
+            <h2>Available Tasks</h2>
+            <div class="task-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="epic">Epics</button>
+                <button class="filter-btn" data-filter="story">Stories</button>
+                <button class="filter-btn" data-filter="task">Tasks</button>
+                <button class="filter-btn" data-filter="issue">Issues</button>
+                <button class="filter-btn" data-filter="ready">Ready</button>
+            </div>
+            
+            <div class="task-list" id="task-list">
+                <!-- Tasks will be dynamically loaded here -->
+                <div class="task-card" data-id="ISSUE-0001">
+                    <div class="task-header">
+                        <span class="task-type issue">ISSUE</span>
+                        <span class="task-id">ISSUE-0001</span>
+                        <span class="task-xp">+25 XP</span>
+                    </div>
+                    <h3 class="task-title">Download Unity Hub from unity.com</h3>
+                    <p class="task-description">Navigate to unity.com and download the Unity Hub installer for your operating system.</p>
+                    <div class="task-rewards">
+                        <span class="reward-item">💰 5 Coins</span>
+                        <span class="reward-item">🎯 Setup Progress</span>
+                        <span class="reward-item">⏱️ 5 min</span>
+                    </div>
+                    <div class="task-actions">
+                        <button class="btn-start" onclick="startTask('ISSUE-0001')">Start Task</button>
+                        <button class="btn-details" onclick="viewDetails('ISSUE-0001')">View Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="load-more">
+                <button class="btn-load-more" id="load-more-tasks">Load More Tasks</button>
+            </div>
+        </section>
+
+        <!-- Active Task Panel -->
+        <section class="active-task-panel" id="active-task-panel" style="display: none;">
+            <h2>Current Task</h2>
+            <div class="active-task-content">
+                <h3 id="active-task-title"></h3>
+                <div class="task-timer">
+                    <span>Time Elapsed:</span>
+                    <span id="task-timer">00:00</span>
+                </div>
+                <div class="task-instructions" id="task-instructions"></div>
+                <div class="task-verification">
+                    <h4>Success Criteria:</h4>
+                    <ul id="success-criteria"></ul>
+                </div>
+                <div class="task-complete-actions">
+                    <button class="btn-complete" onclick="completeTask()">Mark Complete</button>
+                    <button class="btn-abandon" onclick="abandonTask()">Abandon Task</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Memory Fragments -->
+        <section class="memory-fragments">
+            <h2>Memory Fragments</h2>
+            <div class="fragments-grid" id="fragments-grid">
+                <!-- 49 fragments -->
+            </div>
+        </section>
+
+        <!-- Skill Trees -->
+        <section class="skill-trees">
+            <h2>Skill Mastery</h2>
+            <div class="skill-categories">
+                <div class="skill-category">
+                    <h3>3D Modeling</h3>
+                    <div class="skill-progress">
+                        <div class="skill-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="skill-tasks">0/500 tasks</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <div class="skill-progress">
+                        <div class="skill-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="skill-tasks">0/500 tasks</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Game Design</h3>
+                    <div class="skill-progress">
+                        <div class="skill-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="skill-tasks">0/300 tasks</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Business</h3>
+                    <div class="skill-progress">
+                        <div class="skill-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="skill-tasks">0/200 tasks</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financial Tracker -->
+        <section class="financial-tracker">
+            <h2>Financial Impact</h2>
+            <div class="financial-stats">
+                <div class="financial-item">
+                    <h3>Development Value</h3>
+                    <span class="financial-value">$0</span>
+                </div>
+                <div class="financial-item">
+                    <h3>Asset Value</h3>
+                    <span class="financial-value">$0</span>
+                </div>
+                <div class="financial-item">
+                    <h3>Projected Revenue</h3>
+                    <span class="financial-value">$0</span>
+                </div>
+                <div class="financial-item">
+                    <h3>ROI</h3>
+                    <span class="financial-value">0%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- GitHub Integration Status -->
+        <section class="github-status">
+            <h2>GitHub Integration</h2>
+            <div class="github-info">
+                <div class="status-item">
+                    <span>Repository:</span>
+                    <span id="repo-name">shadowed-realms</span>
+                </div>
+                <div class="status-item">
+                    <span>Open Issues:</span>
+                    <span id="open-issues">5000</span>
+                </div>
+                <div class="status-item">
+                    <span>Completed:</span>
+                    <span id="completed-issues">0</span>
+                </div>
+                <div class="status-item">
+                    <span>Sync Status:</span>
+                    <span id="sync-status" class="status-online">Online</span>
+                </div>
+            </div>
+            <button class="btn-sync" onclick="syncWithGitHub()">Sync Now</button>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/github-data-service.js"></script>
+    <script src="js/sprint-enforcer.js"></script>
+    <script src="js/task-manager.js"></script>
+    <script src="js/memory-system.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
