@@ -6,218 +6,274 @@
     <title>Shadowed Realms - Development Dashboard</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/fromsoft-theme.css">
+    <style>
+        .loading { color: #d4af37; }
+        .error { color: #8b0000; }
+        #real-stats { 
+            background: #1a1a1a; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin: 20px 0;
+            border: 1px solid #3a3a3a;
+        }
+        .stat-row { 
+            display: flex; 
+            justify-content: space-between; 
+            margin: 10px 0;
+            padding: 10px;
+            background: #0a0a0a;
+            border-radius: 4px;
+        }
+        .stat-label { color: #888; }
+        .stat-value { 
+            color: #d4af37; 
+            font-weight: bold; 
+            font-size: 1.2em;
+        }
+    </style>
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Header -->
-        <header class="main-header">
-            <div class="logo">
-                <h1>SHADOWED REALMS</h1>
-                <span class="subtitle">Development Dashboard</span>
-            </div>
-            <div class="player-stats">
-                <div class="stat-item">
-                    <span class="stat-label">Level</span>
-                    <span class="stat-value" id="player-level">1</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">XP</span>
-                    <span class="stat-value" id="player-xp">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Coins</span>
-                    <span class="stat-value" id="player-coins">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Memory</span>
-                    <span class="stat-value" id="memory-fragments">0/49</span>
-                </div>
-            </div>
+        <header class="dashboard-header">
+            <h1 class="game-title">SHADOWED REALMS</h1>
+            <p class="subtitle">Development Dashboard</p>
         </header>
 
-        <!-- Sprint Progress -->
-        <section class="sprint-progress">
-            <h2>Current Sprint: <span id="current-sprint">Sprint 1 - Foundation</span></h2>
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-label">LEVEL</div>
+                <div class="stat-value" id="user-level">1</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">XP</div>
+                <div class="stat-value" id="user-xp">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">COINS</div>
+                <div class="stat-value" id="user-coins">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">MEMORY</div>
+                <div class="stat-value" id="memory-count">0/49</div>
+            </div>
+        </div>
+
+        <div id="real-stats">
+            <h2>Live Repository Stats</h2>
+            <div class="stat-row">
+                <span class="stat-label">Total Issues:</span>
+                <span class="stat-value" id="total-issues">Loading...</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Open Issues:</span>
+                <span class="stat-value" id="open-issues">Loading...</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Total XP Available:</span>
+                <span class="stat-value" id="total-xp-available">Loading...</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Total Coins Available:</span>
+                <span class="stat-value" id="total-coins-available">Loading...</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Memory Fragments:</span>
+                <span class="stat-value" id="memory-fragments">Loading...</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Epics:</span>
+                <span class="stat-value" id="epic-count">Loading...</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">TCG Cards:</span>
+                <span class="stat-value" id="tcg-count">Loading...</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Last Updated:</span>
+                <span class="stat-value" id="last-updated">Loading...</span>
+            </div>
+        </div>
+
+        <div class="sprint-container">
+            <h2>Current Sprint: Sprint 1 - Foundation</h2>
             <div class="progress-bar">
-                <div class="progress-fill" id="sprint-progress"></div>
-                <span class="progress-text">0/1666 Tasks</span>
+                <div class="progress-fill" id="sprint-progress" style="width: 0%"></div>
             </div>
             <div class="sprint-stats">
-                <div class="sprint-stat">
-                    <span>Epics Complete</span>
-                    <span id="epics-complete">0/8</span>
-                </div>
-                <div class="sprint-stat">
-                    <span>Stories Complete</span>
-                    <span id="stories-complete">0/32</span>
-                </div>
-                <div class="sprint-stat">
-                    <span>Assets Created</span>
-                    <span id="assets-created">0/1666</span>
-                </div>
-                <div class="sprint-stat">
-                    <span>Revenue Generated</span>
-                    <span id="revenue-generated">$0</span>
-                </div>
+                <span id="tasks-complete">0</span>/<span id="tasks-total">0</span> Tasks
             </div>
-        </section>
+        </div>
 
-        <!-- Task Picker -->
-        <section class="task-picker">
+        <div class="task-container">
             <h2>Available Tasks</h2>
-            <div class="task-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="epic">Epics</button>
-                <button class="filter-btn" data-filter="story">Stories</button>
-                <button class="filter-btn" data-filter="task">Tasks</button>
-                <button class="filter-btn" data-filter="issue">Issues</button>
-                <button class="filter-btn" data-filter="ready">Ready</button>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">ALL</button>
+                <button class="filter-btn" data-filter="epic">EPICS</button>
+                <button class="filter-btn" data-filter="user-story">STORIES</button>
+                <button class="filter-btn" data-filter="task">TASKS</button>
+                <button class="filter-btn" data-filter="issue">ISSUES</button>
+                <button class="filter-btn" data-filter="memory-fragment">MEMORY</button>
+                <button class="filter-btn" data-filter="tcg">TCG</button>
             </div>
-            
-            <div class="task-list" id="task-list">
-                <!-- Tasks will be dynamically loaded here -->
-                <div class="task-card" data-id="ISSUE-0001">
-                    <div class="task-header">
-                        <span class="task-type issue">ISSUE</span>
-                        <span class="task-id">ISSUE-0001</span>
-                        <span class="task-xp">+25 XP</span>
-                    </div>
-                    <h3 class="task-title">Download Unity Hub from unity.com</h3>
-                    <p class="task-description">Navigate to unity.com and download the Unity Hub installer for your operating system.</p>
-                    <div class="task-rewards">
-                        <span class="reward-item">💰 5 Coins</span>
-                        <span class="reward-item">🎯 Setup Progress</span>
-                        <span class="reward-item">⏱️ 5 min</span>
-                    </div>
-                    <div class="task-actions">
-                        <button class="btn-start" onclick="startTask('ISSUE-0001')">Start Task</button>
-                        <button class="btn-details" onclick="viewDetails('ISSUE-0001')">View Details</button>
-                    </div>
-                </div>
+            <div id="task-list" class="task-list">
+                <div class="loading">Loading issues from GitHub...</div>
             </div>
-            
-            <div class="load-more">
-                <button class="btn-load-more" id="load-more-tasks">Load More Tasks</button>
-            </div>
-        </section>
+        </div>
 
-        <!-- Active Task Panel -->
-        <section class="active-task-panel" id="active-task-panel" style="display: none;">
-            <h2>Current Task</h2>
-            <div class="active-task-content">
-                <h3 id="active-task-title"></h3>
-                <div class="task-timer">
-                    <span>Time Elapsed:</span>
-                    <span id="task-timer">00:00</span>
-                </div>
-                <div class="task-instructions" id="task-instructions"></div>
-                <div class="task-verification">
-                    <h4>Success Criteria:</h4>
-                    <ul id="success-criteria"></ul>
-                </div>
-                <div class="task-complete-actions">
-                    <button class="btn-complete" onclick="completeTask()">Mark Complete</button>
-                    <button class="btn-abandon" onclick="abandonTask()">Abandon Task</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Memory Fragments -->
-        <section class="memory-fragments">
+        <div class="memory-container">
             <h2>Memory Fragments</h2>
-            <div class="fragments-grid" id="fragments-grid">
-                <!-- 49 fragments -->
-            </div>
-        </section>
+            <div id="memory-grid" class="memory-grid"></div>
+        </div>
 
-        <!-- Skill Trees -->
-        <section class="skill-trees">
-            <h2>Skill Mastery</h2>
-            <div class="skill-categories">
-                <div class="skill-category">
-                    <h3>3D Modeling</h3>
-                    <div class="skill-progress">
-                        <div class="skill-fill" style="width: 0%"></div>
-                    </div>
-                    <span class="skill-tasks">0/500 tasks</span>
-                </div>
-                <div class="skill-category">
-                    <h3>Programming</h3>
-                    <div class="skill-progress">
-                        <div class="skill-fill" style="width: 0%"></div>
-                    </div>
-                    <span class="skill-tasks">0/500 tasks</span>
-                </div>
-                <div class="skill-category">
-                    <h3>Game Design</h3>
-                    <div class="skill-progress">
-                        <div class="skill-fill" style="width: 0%"></div>
-                    </div>
-                    <span class="skill-tasks">0/300 tasks</span>
-                </div>
-                <div class="skill-category">
-                    <h3>Business</h3>
-                    <div class="skill-progress">
-                        <div class="skill-fill" style="width: 0%"></div>
-                    </div>
-                    <span class="skill-tasks">0/200 tasks</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Financial Tracker -->
-        <section class="financial-tracker">
-            <h2>Financial Impact</h2>
-            <div class="financial-stats">
-                <div class="financial-item">
-                    <h3>Development Value</h3>
-                    <span class="financial-value">$0</span>
-                </div>
-                <div class="financial-item">
-                    <h3>Asset Value</h3>
-                    <span class="financial-value">$0</span>
-                </div>
-                <div class="financial-item">
-                    <h3>Projected Revenue</h3>
-                    <span class="financial-value">$0</span>
-                </div>
-                <div class="financial-item">
-                    <h3>ROI</h3>
-                    <span class="financial-value">0%</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- GitHub Integration Status -->
-        <section class="github-status">
+        <div class="github-section">
             <h2>GitHub Integration</h2>
-            <div class="github-info">
-                <div class="status-item">
-                    <span>Repository:</span>
-                    <span id="repo-name">shadowed-realms</span>
-                </div>
-                <div class="status-item">
-                    <span>Open Issues:</span>
-                    <span id="open-issues">5000</span>
-                </div>
-                <div class="status-item">
-                    <span>Completed:</span>
-                    <span id="completed-issues">0</span>
-                </div>
-                <div class="status-item">
-                    <span>Sync Status:</span>
-                    <span id="sync-status" class="status-online">Online</span>
-                </div>
+            <div class="github-stats">
+                <p>Repository: <a href="https://github.com/michael-placeholder/shadowed-realms" target="_blank">shadowed-realms</a></p>
+                <p>Project Board: <a href="https://github.com/orgs/michael-placeholder/projects/1" target="_blank">View Board</a></p>
+                <p>Status: <span id="github-status" class="status-online">Connected</span></p>
             </div>
-            <button class="btn-sync" onclick="syncWithGitHub()">Sync Now</button>
-        </section>
+        </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/github-data-service.js"></script>
-    <script src="js/sprint-enforcer.js"></script>
-    <script src="js/task-manager.js"></script>
-    <script src="js/memory-system.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script>
+        // Real-time issue fetching
+        async function fetchRealIssues() {
+            const repo = 'michael-placeholder/shadowed-realms';
+            const container = document.getElementById('task-list');
+            
+            try {
+                // Fetch all issues (up to 100 per page)
+                const response = await fetch(`https://api.github.com/repos/${repo}/issues?state=all&per_page=100`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const issues = await response.json();
+                
+                // Update stats
+                document.getElementById('total-issues').textContent = issues.length;
+                document.getElementById('open-issues').textContent = issues.filter(i => i.state === 'open').length;
+                
+                // Calculate XP and coins
+                let totalXP = 0;
+                let totalCoins = 0;
+                let epicCount = 0;
+                let memoryCount = 0;
+                let tcgCount = 0;
+                
+                issues.forEach(issue => {
+                    issue.labels.forEach(label => {
+                        if (label.name.startsWith('xp-')) {
+                            totalXP += parseInt(label.name.replace('xp-', ''));
+                        }
+                        if (label.name.startsWith('coins-')) {
+                            totalCoins += parseInt(label.name.replace('coins-', ''));
+                        }
+                        if (label.name === 'epic') epicCount++;
+                        if (label.name === 'memory-fragment') memoryCount++;
+                        if (label.name === 'tcg') tcgCount++;
+                    });
+                });
+                
+                document.getElementById('total-xp-available').textContent = totalXP.toLocaleString();
+                document.getElementById('total-coins-available').textContent = totalCoins.toLocaleString();
+                document.getElementById('epic-count').textContent = epicCount;
+                document.getElementById('memory-fragments').textContent = memoryCount;
+                document.getElementById('tcg-count').textContent = tcgCount;
+                document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
+                
+                // Display issues
+                if (issues.length > 0) {
+                    container.innerHTML = '';
+                    issues.slice(0, 50).forEach(issue => {
+                        const card = createIssueCard(issue);
+                        container.appendChild(card);
+                    });
+                    
+                    if (issues.length > 50) {
+                        container.innerHTML += `<p style="text-align: center; color: #888;">Showing 50 of ${issues.length} issues</p>`;
+                    }
+                } else {
+                    container.innerHTML = '<p>No issues found</p>';
+                }
+                
+                // Update sprint progress
+                const closedCount = issues.filter(i => i.state === 'closed').length;
+                document.getElementById('tasks-complete').textContent = closedCount;
+                document.getElementById('tasks-total').textContent = issues.length;
+                const progress = issues.length > 0 ? (closedCount / issues.length * 100) : 0;
+                document.getElementById('sprint-progress').style.width = progress + '%';
+                
+            } catch (error) {
+                console.error('Error fetching issues:', error);
+                container.innerHTML = `<div class="error">Error: ${error.message}. This may be due to rate limiting. The API allows 60 requests/hour for unauthenticated requests.</div>`;
+                document.getElementById('github-status').textContent = 'Rate Limited';
+                document.getElementById('github-status').className = 'status-error';
+            }
+        }
+        
+        function createIssueCard(issue) {
+            const card = document.createElement('div');
+            card.className = 'task-card';
+            card.dataset.labels = issue.labels.map(l => l.name).join(' ');
+            
+            let xp = 0;
+            let coins = 0;
+            issue.labels.forEach(label => {
+                if (label.name.startsWith('xp-')) {
+                    xp = parseInt(label.name.replace('xp-', ''));
+                }
+                if (label.name.startsWith('coins-')) {
+                    coins = parseInt(label.name.replace('coins-', ''));
+                }
+            });
+            
+            card.innerHTML = `
+                <div class="task-header">
+                    <span class="task-number">#${issue.number}</span>
+                    <span class="task-state ${issue.state}">${issue.state}</span>
+                </div>
+                <h4 class="task-title">${issue.title}</h4>
+                <div class="task-rewards">
+                    ${xp > 0 ? `<span class="xp-reward">🌟 ${xp} XP</span>` : ''}
+                    ${coins > 0 ? `<span class="coin-reward">🪙 ${coins} coins</span>` : ''}
+                </div>
+                <div class="task-labels">
+                    ${issue.labels.map(l => `<span class="label" style="background-color: #${l.color}">${l.name}</span>`).join('')}
+                </div>
+                <div class="task-actions">
+                    <a href="${issue.html_url}" target="_blank" class="btn-view">View on GitHub</a>
+                </div>
+            `;
+            
+            return card;
+        }
+        
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                const cards = document.querySelectorAll('.task-card');
+                
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.labels.includes(filter)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Load issues on page load
+        fetchRealIssues();
+        
+        // Refresh every 60 seconds to avoid rate limits
+        setInterval(fetchRealIssues, 60000);
+    </script>
 </body>
 </html>
