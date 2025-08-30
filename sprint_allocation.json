@@ -1,0 +1,1677 @@
+{
+  "organization": "michael-placeholder",
+  "project": "Shadowed Realms RPG Development",
+  "repository": "shadowed-realms",
+  "methodology": "Agile Scrum",
+  "sprint_duration": "1 week (20 hours)",
+  "total_sprints": 103,
+  "total_weeks": 103,
+  "total_hours": 1965.0,
+  "sprints": [
+    {
+      "sprint_number": 1,
+      "week": 1,
+      "hours": 20.0,
+      "issue_count": 40,
+      "issue_range": "1-40",
+      "tasks_range": "1-160",
+      "epics": [
+        "EPIC-001: Ideation & Documentation"
+      ],
+      "user_stories": [
+        "US-001: Documentation"
+      ],
+      "velocity": 8.0,
+      "completion_percentage": 4.0
+    },
+    {
+      "sprint_number": 2,
+      "week": 2,
+      "hours": 20.0,
+      "issue_count": 25,
+      "issue_range": "41-65",
+      "tasks_range": "161-260",
+      "epics": [
+        "EPIC-001: Ideation & Documentation"
+      ],
+      "user_stories": [
+        "US-001: Documentation",
+        "US-002: Project Structure"
+      ],
+      "velocity": 5.0,
+      "completion_percentage": 6.5
+    },
+    {
+      "sprint_number": 3,
+      "week": 3,
+      "hours": 20.0,
+      "issue_count": 20,
+      "issue_range": "66-85",
+      "tasks_range": "261-340",
+      "epics": [
+        "EPIC-001: Ideation & Documentation"
+      ],
+      "user_stories": [
+        "US-002: Project Structure"
+      ],
+      "velocity": 4.0,
+      "completion_percentage": 8.5
+    },
+    {
+      "sprint_number": 4,
+      "week": 4,
+      "hours": 19.0,
+      "issue_count": 17,
+      "issue_range": "86-102",
+      "tasks_range": "341-408",
+      "epics": [
+        "EPIC-002: Core Systems",
+        "EPIC-001: Ideation & Documentation"
+      ],
+      "user_stories": [
+        "US-003: Movement",
+        "US-002: Project Structure"
+      ],
+      "velocity": 3.4,
+      "completion_percentage": 10.2
+    },
+    {
+      "sprint_number": 5,
+      "week": 5,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "103-112",
+      "tasks_range": "409-448",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-003: Movement"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 11.2
+    },
+    {
+      "sprint_number": 6,
+      "week": 6,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "113-122",
+      "tasks_range": "449-488",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-003: Movement"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 12.2
+    },
+    {
+      "sprint_number": 7,
+      "week": 7,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "123-132",
+      "tasks_range": "489-528",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-003: Movement"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 13.2
+    },
+    {
+      "sprint_number": 8,
+      "week": 8,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "133-142",
+      "tasks_range": "529-568",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-003: Movement"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 14.2
+    },
+    {
+      "sprint_number": 9,
+      "week": 9,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "143-152",
+      "tasks_range": "569-608",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-003: Movement"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 15.2
+    },
+    {
+      "sprint_number": 10,
+      "week": 10,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "153-162",
+      "tasks_range": "609-648",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-003: Movement"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 16.2
+    },
+    {
+      "sprint_number": 11,
+      "week": 11,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "163-172",
+      "tasks_range": "649-688",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-003: Movement"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 17.2
+    },
+    {
+      "sprint_number": 12,
+      "week": 12,
+      "hours": 18.5,
+      "issue_count": 9,
+      "issue_range": "173-181",
+      "tasks_range": "689-724",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-003: Movement",
+        "US-004: Inventory"
+      ],
+      "velocity": 1.8,
+      "completion_percentage": 18.1
+    },
+    {
+      "sprint_number": 13,
+      "week": 13,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "182-189",
+      "tasks_range": "725-756",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-004: Inventory"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 18.9
+    },
+    {
+      "sprint_number": 14,
+      "week": 14,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "190-197",
+      "tasks_range": "757-788",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-004: Inventory"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 19.7
+    },
+    {
+      "sprint_number": 15,
+      "week": 15,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "198-205",
+      "tasks_range": "789-820",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-004: Inventory"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 20.5
+    },
+    {
+      "sprint_number": 16,
+      "week": 16,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "206-213",
+      "tasks_range": "821-852",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-004: Inventory"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 21.3
+    },
+    {
+      "sprint_number": 17,
+      "week": 17,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "214-221",
+      "tasks_range": "853-884",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-004: Inventory"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 22.1
+    },
+    {
+      "sprint_number": 18,
+      "week": 18,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "222-229",
+      "tasks_range": "885-916",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-004: Inventory"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 22.9
+    },
+    {
+      "sprint_number": 19,
+      "week": 19,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "230-237",
+      "tasks_range": "917-948",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-004: Inventory"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 23.7
+    },
+    {
+      "sprint_number": 20,
+      "week": 20,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "238-245",
+      "tasks_range": "949-980",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-004: Inventory"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 24.5
+    },
+    {
+      "sprint_number": 21,
+      "week": 21,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "246-253",
+      "tasks_range": "981-1012",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-004: Inventory"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 25.3
+    },
+    {
+      "sprint_number": 22,
+      "week": 22,
+      "hours": 17.5,
+      "issue_count": 7,
+      "issue_range": "254-260",
+      "tasks_range": "1013-1040",
+      "epics": [
+        "EPIC-002: Core Systems"
+      ],
+      "user_stories": [
+        "US-004: Inventory"
+      ],
+      "velocity": 1.4,
+      "completion_percentage": 26.0
+    },
+    {
+      "sprint_number": 23,
+      "week": 23,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "261-266",
+      "tasks_range": "1041-1064",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 26.6
+    },
+    {
+      "sprint_number": 24,
+      "week": 24,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "267-272",
+      "tasks_range": "1065-1088",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 27.2
+    },
+    {
+      "sprint_number": 25,
+      "week": 25,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "273-278",
+      "tasks_range": "1089-1112",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 27.8
+    },
+    {
+      "sprint_number": 26,
+      "week": 26,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "279-284",
+      "tasks_range": "1113-1136",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 28.4
+    },
+    {
+      "sprint_number": 27,
+      "week": 27,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "285-290",
+      "tasks_range": "1137-1160",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 29.0
+    },
+    {
+      "sprint_number": 28,
+      "week": 28,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "291-296",
+      "tasks_range": "1161-1184",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 29.6
+    },
+    {
+      "sprint_number": 29,
+      "week": 29,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "297-302",
+      "tasks_range": "1185-1208",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 30.2
+    },
+    {
+      "sprint_number": 30,
+      "week": 30,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "303-308",
+      "tasks_range": "1209-1232",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 30.8
+    },
+    {
+      "sprint_number": 31,
+      "week": 31,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "309-314",
+      "tasks_range": "1233-1256",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 31.4
+    },
+    {
+      "sprint_number": 32,
+      "week": 32,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "315-320",
+      "tasks_range": "1257-1280",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 32.0
+    },
+    {
+      "sprint_number": 33,
+      "week": 33,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "321-326",
+      "tasks_range": "1281-1304",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 32.6
+    },
+    {
+      "sprint_number": 34,
+      "week": 34,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "327-332",
+      "tasks_range": "1305-1328",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 33.2
+    },
+    {
+      "sprint_number": 35,
+      "week": 35,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "333-338",
+      "tasks_range": "1329-1352",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 33.8
+    },
+    {
+      "sprint_number": 36,
+      "week": 36,
+      "hours": 20.0,
+      "issue_count": 6,
+      "issue_range": "339-344",
+      "tasks_range": "1353-1376",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System",
+        "US-005: Melee Combat"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 34.4
+    },
+    {
+      "sprint_number": 37,
+      "week": 37,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "345-349",
+      "tasks_range": "1377-1396",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 34.9
+    },
+    {
+      "sprint_number": 38,
+      "week": 38,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "350-354",
+      "tasks_range": "1397-1416",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 35.4
+    },
+    {
+      "sprint_number": 39,
+      "week": 39,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "355-359",
+      "tasks_range": "1417-1436",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 35.9
+    },
+    {
+      "sprint_number": 40,
+      "week": 40,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "360-364",
+      "tasks_range": "1437-1456",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 36.4
+    },
+    {
+      "sprint_number": 41,
+      "week": 41,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "365-369",
+      "tasks_range": "1457-1476",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 36.9
+    },
+    {
+      "sprint_number": 42,
+      "week": 42,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "370-374",
+      "tasks_range": "1477-1496",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 37.4
+    },
+    {
+      "sprint_number": 43,
+      "week": 43,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "375-379",
+      "tasks_range": "1497-1516",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 37.9
+    },
+    {
+      "sprint_number": 44,
+      "week": 44,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "380-384",
+      "tasks_range": "1517-1536",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 38.4
+    },
+    {
+      "sprint_number": 45,
+      "week": 45,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "385-389",
+      "tasks_range": "1537-1556",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 38.9
+    },
+    {
+      "sprint_number": 46,
+      "week": 46,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "390-394",
+      "tasks_range": "1557-1576",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 39.4
+    },
+    {
+      "sprint_number": 47,
+      "week": 47,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "395-399",
+      "tasks_range": "1577-1596",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 39.9
+    },
+    {
+      "sprint_number": 48,
+      "week": 48,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "400-404",
+      "tasks_range": "1597-1616",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 40.4
+    },
+    {
+      "sprint_number": 49,
+      "week": 49,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "405-409",
+      "tasks_range": "1617-1636",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 40.9
+    },
+    {
+      "sprint_number": 50,
+      "week": 50,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "410-414",
+      "tasks_range": "1637-1656",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 41.4
+    },
+    {
+      "sprint_number": 51,
+      "week": 51,
+      "hours": 17.5,
+      "issue_count": 5,
+      "issue_range": "415-419",
+      "tasks_range": "1657-1676",
+      "epics": [
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System"
+      ],
+      "velocity": 1.0,
+      "completion_percentage": 41.9
+    },
+    {
+      "sprint_number": 52,
+      "week": 52,
+      "hours": 18.5,
+      "issue_count": 7,
+      "issue_range": "420-426",
+      "tasks_range": "1677-1704",
+      "epics": [
+        "EPIC-004: Environment System",
+        "EPIC-003: Combat Framework"
+      ],
+      "user_stories": [
+        "US-006: Magic System",
+        "US-007: Environments"
+      ],
+      "velocity": 1.4,
+      "completion_percentage": 42.6
+    },
+    {
+      "sprint_number": 53,
+      "week": 53,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "427-434",
+      "tasks_range": "1705-1736",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-007: Environments"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 43.4
+    },
+    {
+      "sprint_number": 54,
+      "week": 54,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "435-442",
+      "tasks_range": "1737-1768",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-007: Environments"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 44.2
+    },
+    {
+      "sprint_number": 55,
+      "week": 55,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "443-450",
+      "tasks_range": "1769-1800",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-007: Environments"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 45.0
+    },
+    {
+      "sprint_number": 56,
+      "week": 56,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "451-458",
+      "tasks_range": "1801-1832",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-007: Environments"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 45.8
+    },
+    {
+      "sprint_number": 57,
+      "week": 57,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "459-466",
+      "tasks_range": "1833-1864",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-007: Environments"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 46.6
+    },
+    {
+      "sprint_number": 58,
+      "week": 58,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "467-474",
+      "tasks_range": "1865-1896",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-007: Environments"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 47.4
+    },
+    {
+      "sprint_number": 59,
+      "week": 59,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "475-482",
+      "tasks_range": "1897-1928",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-007: Environments"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 48.2
+    },
+    {
+      "sprint_number": 60,
+      "week": 60,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "483-490",
+      "tasks_range": "1929-1960",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-007: Environments"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 49.0
+    },
+    {
+      "sprint_number": 61,
+      "week": 61,
+      "hours": 20.0,
+      "issue_count": 8,
+      "issue_range": "491-498",
+      "tasks_range": "1961-1992",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-007: Environments"
+      ],
+      "velocity": 1.6,
+      "completion_percentage": 49.8
+    },
+    {
+      "sprint_number": 62,
+      "week": 62,
+      "hours": 19.0,
+      "issue_count": 9,
+      "issue_range": "499-507",
+      "tasks_range": "1993-2028",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-008: Weather",
+        "US-007: Environments"
+      ],
+      "velocity": 1.8,
+      "completion_percentage": 50.7
+    },
+    {
+      "sprint_number": 63,
+      "week": 63,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "508-517",
+      "tasks_range": "2029-2068",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-008: Weather"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 51.7
+    },
+    {
+      "sprint_number": 64,
+      "week": 64,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "518-527",
+      "tasks_range": "2069-2108",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-008: Weather"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 52.7
+    },
+    {
+      "sprint_number": 65,
+      "week": 65,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "528-537",
+      "tasks_range": "2109-2148",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-008: Weather"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 53.7
+    },
+    {
+      "sprint_number": 66,
+      "week": 66,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "538-547",
+      "tasks_range": "2149-2188",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-008: Weather"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 54.7
+    },
+    {
+      "sprint_number": 67,
+      "week": 67,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "548-557",
+      "tasks_range": "2189-2228",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-008: Weather"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 55.7
+    },
+    {
+      "sprint_number": 68,
+      "week": 68,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "558-567",
+      "tasks_range": "2229-2268",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-008: Weather"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 56.7
+    },
+    {
+      "sprint_number": 69,
+      "week": 69,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "568-577",
+      "tasks_range": "2269-2308",
+      "epics": [
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-008: Weather"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 57.7
+    },
+    {
+      "sprint_number": 70,
+      "week": 70,
+      "hours": 19.5,
+      "issue_count": 12,
+      "issue_range": "578-589",
+      "tasks_range": "2309-2356",
+      "epics": [
+        "EPIC-005: Character System",
+        "EPIC-004: Environment System"
+      ],
+      "user_stories": [
+        "US-008: Weather",
+        "US-009: Customization"
+      ],
+      "velocity": 2.4,
+      "completion_percentage": 58.9
+    },
+    {
+      "sprint_number": 71,
+      "week": 71,
+      "hours": 19.5,
+      "issue_count": 13,
+      "issue_range": "590-602",
+      "tasks_range": "2357-2408",
+      "epics": [
+        "EPIC-005: Character System"
+      ],
+      "user_stories": [
+        "US-009: Customization"
+      ],
+      "velocity": 2.6,
+      "completion_percentage": 60.2
+    },
+    {
+      "sprint_number": 72,
+      "week": 72,
+      "hours": 19.5,
+      "issue_count": 13,
+      "issue_range": "603-615",
+      "tasks_range": "2409-2460",
+      "epics": [
+        "EPIC-005: Character System"
+      ],
+      "user_stories": [
+        "US-009: Customization"
+      ],
+      "velocity": 2.6,
+      "completion_percentage": 61.5
+    },
+    {
+      "sprint_number": 73,
+      "week": 73,
+      "hours": 19.5,
+      "issue_count": 13,
+      "issue_range": "616-628",
+      "tasks_range": "2461-2512",
+      "epics": [
+        "EPIC-005: Character System"
+      ],
+      "user_stories": [
+        "US-009: Customization"
+      ],
+      "velocity": 2.6,
+      "completion_percentage": 62.8
+    },
+    {
+      "sprint_number": 74,
+      "week": 74,
+      "hours": 20.0,
+      "issue_count": 14,
+      "issue_range": "629-642",
+      "tasks_range": "2513-2568",
+      "epics": [
+        "EPIC-005: Character System",
+        "EPIC-006: UI/UX Framework"
+      ],
+      "user_stories": [
+        "US-011: UI Design",
+        "US-009: Customization"
+      ],
+      "velocity": 2.8,
+      "completion_percentage": 64.2
+    },
+    {
+      "sprint_number": 75,
+      "week": 75,
+      "hours": 20.0,
+      "issue_count": 20,
+      "issue_range": "643-662",
+      "tasks_range": "2569-2648",
+      "epics": [
+        "EPIC-006: UI/UX Framework"
+      ],
+      "user_stories": [
+        "US-011: UI Design"
+      ],
+      "velocity": 4.0,
+      "completion_percentage": 66.2
+    },
+    {
+      "sprint_number": 76,
+      "week": 76,
+      "hours": 20.0,
+      "issue_count": 20,
+      "issue_range": "663-682",
+      "tasks_range": "2649-2728",
+      "epics": [
+        "EPIC-006: UI/UX Framework"
+      ],
+      "user_stories": [
+        "US-011: UI Design"
+      ],
+      "velocity": 4.0,
+      "completion_percentage": 68.2
+    },
+    {
+      "sprint_number": 77,
+      "week": 77,
+      "hours": 20.0,
+      "issue_count": 20,
+      "issue_range": "683-702",
+      "tasks_range": "2729-2808",
+      "epics": [
+        "EPIC-006: UI/UX Framework"
+      ],
+      "user_stories": [
+        "US-011: UI Design"
+      ],
+      "velocity": 4.0,
+      "completion_percentage": 70.2
+    },
+    {
+      "sprint_number": 78,
+      "week": 78,
+      "hours": 19.5,
+      "issue_count": 19,
+      "issue_range": "703-721",
+      "tasks_range": "2809-2884",
+      "epics": [
+        "EPIC-006: UI/UX Framework"
+      ],
+      "user_stories": [
+        "US-011: UI Design",
+        "US-012: HUD"
+      ],
+      "velocity": 3.8,
+      "completion_percentage": 72.1
+    },
+    {
+      "sprint_number": 79,
+      "week": 79,
+      "hours": 19.5,
+      "issue_count": 13,
+      "issue_range": "722-734",
+      "tasks_range": "2885-2936",
+      "epics": [
+        "EPIC-006: UI/UX Framework"
+      ],
+      "user_stories": [
+        "US-012: HUD"
+      ],
+      "velocity": 2.6,
+      "completion_percentage": 73.4
+    },
+    {
+      "sprint_number": 80,
+      "week": 80,
+      "hours": 19.5,
+      "issue_count": 13,
+      "issue_range": "735-747",
+      "tasks_range": "2937-2988",
+      "epics": [
+        "EPIC-006: UI/UX Framework"
+      ],
+      "user_stories": [
+        "US-012: HUD"
+      ],
+      "velocity": 2.6,
+      "completion_percentage": 74.7
+    },
+    {
+      "sprint_number": 81,
+      "week": 81,
+      "hours": 19.5,
+      "issue_count": 13,
+      "issue_range": "748-760",
+      "tasks_range": "2989-3040",
+      "epics": [
+        "EPIC-006: UI/UX Framework"
+      ],
+      "user_stories": [
+        "US-012: HUD"
+      ],
+      "velocity": 2.6,
+      "completion_percentage": 76.0
+    },
+    {
+      "sprint_number": 82,
+      "week": 82,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "761-770",
+      "tasks_range": "3041-3080",
+      "epics": [
+        "EPIC-005: Character System"
+      ],
+      "user_stories": [
+        "US-010: Progression"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 77.0
+    },
+    {
+      "sprint_number": 83,
+      "week": 83,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "771-780",
+      "tasks_range": "3081-3120",
+      "epics": [
+        "EPIC-005: Character System"
+      ],
+      "user_stories": [
+        "US-010: Progression"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 78.0
+    },
+    {
+      "sprint_number": 84,
+      "week": 84,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "781-790",
+      "tasks_range": "3121-3160",
+      "epics": [
+        "EPIC-005: Character System"
+      ],
+      "user_stories": [
+        "US-010: Progression"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 79.0
+    },
+    {
+      "sprint_number": 85,
+      "week": 85,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "791-800",
+      "tasks_range": "3161-3200",
+      "epics": [
+        "EPIC-005: Character System"
+      ],
+      "user_stories": [
+        "US-010: Progression"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 80.0
+    },
+    {
+      "sprint_number": 86,
+      "week": 86,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "801-810",
+      "tasks_range": "3201-3240",
+      "epics": [
+        "EPIC-005: Character System"
+      ],
+      "user_stories": [
+        "US-010: Progression"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 81.0
+    },
+    {
+      "sprint_number": 87,
+      "week": 87,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "811-820",
+      "tasks_range": "3241-3280",
+      "epics": [
+        "EPIC-005: Character System"
+      ],
+      "user_stories": [
+        "US-010: Progression"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 82.0
+    },
+    {
+      "sprint_number": 88,
+      "week": 88,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "821-826",
+      "tasks_range": "3281-3304",
+      "epics": [
+        "EPIC-007: Save System"
+      ],
+      "user_stories": [
+        "US-013: Save/Load"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 82.6
+    },
+    {
+      "sprint_number": 89,
+      "week": 89,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "827-832",
+      "tasks_range": "3305-3328",
+      "epics": [
+        "EPIC-007: Save System"
+      ],
+      "user_stories": [
+        "US-013: Save/Load"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 83.2
+    },
+    {
+      "sprint_number": 90,
+      "week": 90,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "833-838",
+      "tasks_range": "3329-3352",
+      "epics": [
+        "EPIC-007: Save System"
+      ],
+      "user_stories": [
+        "US-013: Save/Load"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 83.8
+    },
+    {
+      "sprint_number": 91,
+      "week": 91,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "839-844",
+      "tasks_range": "3353-3376",
+      "epics": [
+        "EPIC-007: Save System"
+      ],
+      "user_stories": [
+        "US-013: Save/Load"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 84.4
+    },
+    {
+      "sprint_number": 92,
+      "week": 92,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "845-850",
+      "tasks_range": "3377-3400",
+      "epics": [
+        "EPIC-007: Save System"
+      ],
+      "user_stories": [
+        "US-013: Save/Load"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 85.0
+    },
+    {
+      "sprint_number": 93,
+      "week": 93,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "851-856",
+      "tasks_range": "3401-3424",
+      "epics": [
+        "EPIC-007: Save System"
+      ],
+      "user_stories": [
+        "US-013: Save/Load"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 85.6
+    },
+    {
+      "sprint_number": 94,
+      "week": 94,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "857-862",
+      "tasks_range": "3425-3448",
+      "epics": [
+        "EPIC-007: Save System"
+      ],
+      "user_stories": [
+        "US-013: Save/Load"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 86.2
+    },
+    {
+      "sprint_number": 95,
+      "week": 95,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "863-868",
+      "tasks_range": "3449-3472",
+      "epics": [
+        "EPIC-007: Save System"
+      ],
+      "user_stories": [
+        "US-013: Save/Load"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 86.8
+    },
+    {
+      "sprint_number": 96,
+      "week": 96,
+      "hours": 18.0,
+      "issue_count": 6,
+      "issue_range": "869-874",
+      "tasks_range": "3473-3496",
+      "epics": [
+        "EPIC-007: Save System"
+      ],
+      "user_stories": [
+        "US-013: Save/Load"
+      ],
+      "velocity": 1.2,
+      "completion_percentage": 87.4
+    },
+    {
+      "sprint_number": 97,
+      "week": 97,
+      "hours": 20.0,
+      "issue_count": 7,
+      "issue_range": "875-881",
+      "tasks_range": "3497-3524",
+      "epics": [
+        "EPIC-007: Save System"
+      ],
+      "user_stories": [
+        "US-014: Cloud Saves",
+        "US-013: Save/Load"
+      ],
+      "velocity": 1.4,
+      "completion_percentage": 88.1
+    },
+    {
+      "sprint_number": 98,
+      "week": 98,
+      "hours": 20.0,
+      "issue_count": 10,
+      "issue_range": "882-891",
+      "tasks_range": "3525-3564",
+      "epics": [
+        "EPIC-007: Save System"
+      ],
+      "user_stories": [
+        "US-014: Cloud Saves"
+      ],
+      "velocity": 2.0,
+      "completion_percentage": 89.1
+    },
+    {
+      "sprint_number": 99,
+      "week": 99,
+      "hours": 20.0,
+      "issue_count": 11,
+      "issue_range": "892-902",
+      "tasks_range": "3565-3608",
+      "epics": [
+        "EPIC-007: Save System",
+        "EPIC-008: Audio & Polish"
+      ],
+      "user_stories": [
+        "US-014: Cloud Saves",
+        "US-015: Audio"
+      ],
+      "velocity": 2.2,
+      "completion_percentage": 90.2
+    },
+    {
+      "sprint_number": 100,
+      "week": 100,
+      "hours": 20.0,
+      "issue_count": 20,
+      "issue_range": "903-922",
+      "tasks_range": "3609-3688",
+      "epics": [
+        "EPIC-008: Audio & Polish"
+      ],
+      "user_stories": [
+        "US-015: Audio"
+      ],
+      "velocity": 4.0,
+      "completion_percentage": 92.2
+    },
+    {
+      "sprint_number": 101,
+      "week": 101,
+      "hours": 20.0,
+      "issue_count": 20,
+      "issue_range": "923-942",
+      "tasks_range": "3689-3768",
+      "epics": [
+        "EPIC-008: Audio & Polish"
+      ],
+      "user_stories": [
+        "US-015: Audio"
+      ],
+      "velocity": 4.0,
+      "completion_percentage": 94.2
+    },
+    {
+      "sprint_number": 102,
+      "week": 102,
+      "hours": 20.0,
+      "issue_count": 22,
+      "issue_range": "943-964",
+      "tasks_range": "3769-3856",
+      "epics": [
+        "EPIC-008: Audio & Polish"
+      ],
+      "user_stories": [
+        "US-016: Polish",
+        "US-015: Audio"
+      ],
+      "velocity": 4.4,
+      "completion_percentage": 96.4
+    },
+    {
+      "sprint_number": 103,
+      "week": 103,
+      "hours": 18.0,
+      "issue_count": 36,
+      "issue_range": "965-1000",
+      "tasks_range": "3857-4000",
+      "epics": [
+        "EPIC-008: Audio & Polish"
+      ],
+      "user_stories": [
+        "US-016: Polish"
+      ],
+      "velocity": 7.2,
+      "completion_percentage": 100.0
+    }
+  ]
+}
