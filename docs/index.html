@@ -49,7 +49,7 @@
             left: -9999px;
             z-index: 999;
             padding: 1em;
-            background: var(--dark-souls-black);
+            background: var(--fog-gray);
             color: var(--garden-gold);
             text-decoration: none;
         }
@@ -199,7 +199,7 @@
         
         .subtitle {
             font-size: 1.2rem;
-            color: var(--soul-blue);  /* WCAG AA compliant */
+            color: #8fa4b8;  /* Better contrast */  /* WCAG AA compliant */
             font-style: italic;
             opacity: 0.9;
         }
@@ -248,7 +248,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--dark-souls-black);
+            color: #d0d0d0;
             font-weight: bold;
         }
         
@@ -657,7 +657,7 @@
         
         .stat-description {
             font-size: 0.85rem;
-            color: #999;
+            color: #a8a8a8;  /* WCAG AA */
             margin-top: 5px;
             font-style: italic;
         }
@@ -817,7 +817,7 @@
         
         .audio-button:hover {
             background: linear-gradient(135deg, var(--garden-gold), var(--ember-orange));
-            color: var(--dark-souls-black);
+            color: #d0d0d0;
             transform: scale(1.05);
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
@@ -1218,7 +1218,7 @@
         
         <!-- Enhanced Tasks Container -->
         <div class="tasks-container" role="region" aria-label="Issue and Task Tracker">
-            <h2 class="tasks-header">Next Issues to Complete (Each Has 4 Tasks)</h2>
+            <h2 class="tasks-header">Next Issues (Ascending Order 1→1000) - Each Has 4 Tasks</h2>
             <div class="task-list" id="task-list">
                 <div class="loading">Summoning tasks from the void</div>
             </div>
@@ -1551,9 +1551,9 @@
             
             // Sort issues in ascending order
             issues.sort((a, b) => {
-                const numA = parseInt(a.title.match(/\[ISSUE-(\d+)\]/)?.[1] || 0);
-                const numB = parseInt(b.title.match(/\[ISSUE-(\d+)\]/)?.[1] || 0);
-                return numA - numB;
+                const numA = parseInt(a.title.match(/\[ISSUE-(\d+)\]/)?.[1] || 9999);
+                const numB = parseInt(b.title.match(/\[ISSUE-(\d+)\]/)?.[1] || 9999);
+                return numA - numB;  // Ascending order
             });
             
             taskList.innerHTML = issues.map(issue => {
@@ -1562,9 +1562,16 @@
                 const coins = extractCoinsFromLabels(issue.labels);
                 const revenue = coins * 10;
                 
-                // Calculate task numbers for this issue
+                // Calculate task numbers for this issue (ASCENDING)
                 const startTask = (issueNum - 1) * 4 + 1;
                 const endTask = startTask + 3;
+                
+                // Show tasks in ascending order
+                const taskList = [];
+                for (let t = startTask; t <= endTask; t++) {
+                    const taskType = ['Initial implementation', 'Testing and validation', 'Documentation', 'Integration'][(t - 1) % 4];
+                    taskList.push(`Task ${t}: ${taskType}`);
+                }
                 
                 // Determine deliverable type
                 let deliverable = 'Deliverable: ';
@@ -1582,13 +1589,13 @@
                 
                 return `
                     <div class="task-item" tabindex="0" role="button" aria-label="Click to view issue details" onclick="window.open('${issue.html_url}', '_blank')">
-                        <div style="background: var(--blood-red); color: white; padding: 5px; margin: -15px -15px 10px -15px; font-size: 0.8rem;">
+                        <div style="background: var(--blood-red); color: #f0f0f0; padding: 5px; margin: -15px -15px 10px -15px; font-size: 0.8rem;">
                             ISSUE #${issueNum} (Contains Tasks ${startTask}-${endTask})
                         </div>
                         <div class="task-title">${issue.title}</div>
-                        <div style="background: rgba(0,0,0,0.3); padding: 10px; margin: 10px 0; border-radius: 4px;">
+                        <div style="background: rgba(30,30,30,0.5); padding: 10px; margin: 10px 0; border-radius: 4px;">
                             <strong>Tasks to Complete:</strong>
-                            <ul style="margin: 5px 0 0 20px; color: var(--soul-blue);  /* WCAG AA compliant */">
+                            <ul style="margin: 5px 0 0 20px; color: var(--soul-blue);">
                                 <li>Task ${startTask}: Initial implementation</li>
                                 <li>Task ${startTask + 1}: Testing and validation</li>
                                 <li>Task ${startTask + 2}: Documentation</li>
