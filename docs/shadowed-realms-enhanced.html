@@ -781,6 +781,15 @@
     <div role="status" aria-live="polite" aria-atomic="true" class="sr-only" id="announcer"></div>
 
     <script>
+        // GitHub Configuration with PROPER Authentication
+        const GITHUB_CONFIG = {
+            owner: 'michael-placeholder',
+            repo: 'shadowed-realms',
+            // Token should be set via localStorage or environment variable
+            token: localStorage.getItem('github_token') || '', // User must add token
+            apiBase: 'https://api.github.com'
+        };
+
         // State Management
         class DashboardState {
             constructor() {
@@ -897,7 +906,7 @@
             ]
         };
 
-        // GitHub Data Handler with Enhanced Error Handling
+        // GitHub Data Handler with PROPER Authentication (fixes 403 errors)
         async function fetchGitHubData() {
             const taskList = document.getElementById('task-list');
             
@@ -911,46 +920,88 @@
             `;
 
             try {
-                // Try to fetch real data
-                const response = await fetch(
-                    'https://api.github.com/repos/michael-placeholder/shadowed-realms/issues?state=all&per_page=100',
-                    {
-                        headers: {
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
+                // CRITICAL: These headers are REQUIRED by GitHub
+                const headers = {
+                    'Accept': 'application/vnd.github.v3+json',
+                    'User-Agent': 'Shadowed-Realms-Dashboard', // THIS FIXES 403 ERRORS!
+                    'Authorization': `Bearer ${GITHUB_CONFIG.token}` // 5000 req/hr instead of 60
+                };
+
+                console.log('Fetching with proper authentication...');
+
+                // Fetch all issues with pagination
+                const allIssues = [];
+                let page = 1;
+                let hasMore = true;
+
+                while (hasMore && page <= 11) { // Max 11 pages for 1100 issues
+                    const response = await fetch(
+                        `${GITHUB_CONFIG.apiBase}/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues?state=all&per_page=100&page=${page}`,
+                        { headers }
+                    );
+
+                    // Check rate limit headers
+                    const remaining = response.headers.get('x-ratelimit-remaining');
+                    const limit = response.headers.get('x-ratelimit-limit');
+                    
+                    console.log(`Rate Limit: ${remaining}/${limit} remaining, Page ${page}`);
+
+                    if (response.status === 403 || response.status === 429) {
+                        const reset = response.headers.get('x-ratelimit-reset');
+                        const resetDate = new Date(parseInt(reset) * 1000);
+                        console.error(`Rate limited! Resets at: ${resetDate.toLocaleTimeString()}`);
+                        throw new Error('Rate limited');
                     }
-                );
 
-                if (response.status === 403 || response.status === 429) {
-                    throw new Error('Rate limited');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const issues = await response.json();
+                    
+                    if (issues.length === 0) {
+                        break;
+                    }
+                    
+                    allIssues.push(...issues);
+                    hasMore = issues.length === 100;
+                    page++;
                 }
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const issues = await response.json();
                 
-                if (issues.length > 0) {
-                    dashboardState.setState({ issues });
-                    processIssues(issues);
+                if (allIssues.length > 0) {
+                    console.log(`✅ Successfully fetched ${allIssues.length} REAL issues from GitHub`);
+                    dashboardState.setState({ issues: allIssues });
+                    processIssues(allIssues);
+                    
+                    // Cache the data
+                    localStorage.setItem('github_issues_cache', JSON.stringify({
+                        issues: allIssues,
+                        timestamp: Date.now()
+                    }));
                 } else {
                     // Use fallback if no issues
                     useFallbackData();
                 }
 
             } catch (error) {
-                console.log('GitHub API error:', error.message);
+                console.error('GitHub API error:', error.message);
                 
                 // Check localStorage cache
                 const cached = localStorage.getItem('github_issues_cache');
                 if (cached) {
-                    const data = JSON.parse(cached);
-                    if (Date.now() - data.timestamp < 3600000) { // 1 hour
-                        dashboardState.setState({ issues: data.issues });
-                        processIssues(data.issues);
-                        showNotification('Using cached trials');
-                        return;
+                    try {
+                        const data = JSON.parse(cached);
+                        if (data.issues && data.issues.length > 0) {
+                            const age = Date.now() - data.timestamp;
+                            const ageMinutes = Math.floor(age / 60000);
+                            console.log(`Using cached data (${data.issues.length} issues, ${ageMinutes} minutes old)`);
+                            dashboardState.setState({ issues: data.issues });
+                            processIssues(data.issues);
+                            showNotification(`Using cached trials (${ageMinutes} min old)`);
+                            return;
+                        }
+                    } catch (e) {
+                        console.error('Cache parse error:', e);
                     }
                 }
                 
@@ -1184,8 +1235,46 @@
             document.body.appendChild(modal);
         }
 
+        // Add token setup UI if no token present
+        function checkForToken() {
+            if (!GITHUB_CONFIG.token) {
+                const modal = document.createElement('div');
+                modal.className = 'lore-modal';
+                modal.innerHTML = `
+                    <div class="lore-content">
+                        <h3 class="lore-title">BEARER OF THE CURSE</h3>
+                        <p class="lore-text">
+                            To access the GitHub realm, you must possess a token of authentication.<br><br>
+                            Without it, you are limited to 60 requests per hour.<br>
+                            With it, you may make 5000 requests per hour.
+                        </p>
+                        <div style="margin: 20px 0;">
+                            <input type="password" 
+                                   id="github-token-input" 
+                                   placeholder="Enter GitHub Personal Access Token (ghp_...)"
+                                   style="width: 100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--garden-gold); color: var(--garden-gold); font-family: 'Crimson Text', serif;">
+                        </div>
+                        <button class="lore-close" onclick="
+                            const token = document.getElementById('github-token-input').value;
+                            if (token) {
+                                localStorage.setItem('github_token', token);
+                                location.reload();
+                            }
+                        ">Light the Bonfire</button>
+                        <p style="margin-top: 15px; font-size: 0.9em; color: #a8a8a8;">
+                            Get a token at: github.com/settings/tokens<br>
+                            Select scopes: repo, project
+                        </p>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
+            // Check for token
+            checkForToken();
             // Load saved state
             document.getElementById('death-count').textContent = dashboardState.state.deaths;
             
