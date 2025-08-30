@@ -475,9 +475,153 @@
             border: 1px solid var(--blood-red);
             border-radius: 4px;
         }
+        
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(42, 42, 42, 0.95);
+            border: 2px solid var(--abstract-purple);
+            border-radius: 8px;
+            padding: 15px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .audio-controls h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--garden-gold);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .audio-button {
+            background: linear-gradient(135deg, var(--abstract-purple), var(--fog-gray));
+            border: 1px solid var(--garden-gold);
+            color: var(--garden-gold);
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .audio-button:hover {
+            background: linear-gradient(135deg, var(--garden-gold), var(--ember-orange));
+            color: var(--dark-souls-black);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        
+        .audio-button.active {
+            background: var(--estus-green);
+            color: white;
+            box-shadow: 0 0 10px var(--estus-green);
+        }
+        
+        .volume-control {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .volume-slider {
+            width: 100px;
+            accent-color: var(--garden-gold);
+        }
+        
+        .sync-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(42, 42, 42, 0.95);
+            border: 1px solid var(--abstract-purple);
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 0.85rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sync-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--estus-green);
+            animation: syncPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes syncPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        .project-sync-info {
+            background: rgba(107, 70, 193, 0.1);
+            border: 1px solid var(--abstract-purple);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .sync-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .sync-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .sync-icon {
+            color: var(--estus-green);
+        }
     </style>
 </head>
 <body>
+    <!-- Audio Elements -->
+    <audio id="ambientMusic" loop>
+        <source src="audio/ambient music for dashboard.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="introNarration">
+        <source src="audio/intro-narration.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="storyMusic" loop>
+        <source src="audio/background music for stories.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Sync Status Indicator -->
+    <div class="sync-status">
+        <span class="sync-indicator"></span>
+        <span>Live Sync Active</span>
+    </div>
+    
+    <!-- Audio Controls -->
+    <div class="audio-controls">
+        <h3>Sound Controls</h3>
+        <button class="audio-button" id="toggleAmbient">Ambient Music</button>
+        <button class="audio-button" id="playIntro">Play Intro</button>
+        <button class="audio-button" id="toggleStory">Story Music</button>
+        <div class="volume-control">
+            <span>Volume:</span>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
+        </div>
+    </div>
+    
     <div class="bonfire-container">
         <div class="bonfire">
             <div class="flame"></div>
@@ -507,6 +651,36 @@
                 <div class="status-item">
                     <span class="status-indicator status-loading" id="api-status"></span>
                     <span>API Status: <span id="api-status-text">Loading...</span></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="project-sync-info">
+            <h3 style="font-family: 'Cinzel', serif; color: var(--garden-gold); margin-bottom: 10px;">Project Synchronization</h3>
+            <div class="sync-details">
+                <div class="sync-item">
+                    <span class="sync-icon">✓</span>
+                    <span>Organization: michael-placeholder</span>
+                </div>
+                <div class="sync-item">
+                    <span class="sync-icon">✓</span>
+                    <span>Repository: shadowed-realms</span>
+                </div>
+                <div class="sync-item">
+                    <span class="sync-icon">✓</span>
+                    <span>Project Board: #1</span>
+                </div>
+                <div class="sync-item">
+                    <span class="sync-icon">✓</span>
+                    <span>Issues: <span id="total-issues">189</span></span>
+                </div>
+                <div class="sync-item">
+                    <span class="sync-icon">✓</span>
+                    <span>Auto-sync: Every 30s</span>
+                </div>
+                <div class="sync-item">
+                    <span class="sync-icon">✓</span>
+                    <span>Last Update: <span id="last-update">Now</span></span>
                 </div>
             </div>
         </div>
@@ -716,6 +890,120 @@
             const taskList = document.getElementById('task-list');
             taskList.innerHTML = `<div class="error">${message}</div>`;
         }
+        
+        // Audio Controls
+        const ambientMusic = document.getElementById('ambientMusic');
+        const introNarration = document.getElementById('introNarration');
+        const storyMusic = document.getElementById('storyMusic');
+        const volumeSlider = document.getElementById('volumeSlider');
+        
+        // Set initial volume
+        ambientMusic.volume = 0.3;
+        introNarration.volume = 0.3;
+        storyMusic.volume = 0.3;
+        
+        // Volume control
+        volumeSlider.addEventListener('input', (e) => {
+            const volume = e.target.value / 100;
+            ambientMusic.volume = volume;
+            introNarration.volume = volume;
+            storyMusic.volume = volume;
+        });
+        
+        // Ambient music toggle
+        document.getElementById('toggleAmbient').addEventListener('click', function() {
+            if (ambientMusic.paused) {
+                ambientMusic.play();
+                this.classList.add('active');
+                this.textContent = 'Pause Ambient';
+                // Pause other music
+                storyMusic.pause();
+                document.getElementById('toggleStory').classList.remove('active');
+                document.getElementById('toggleStory').textContent = 'Story Music';
+            } else {
+                ambientMusic.pause();
+                this.classList.remove('active');
+                this.textContent = 'Ambient Music';
+            }
+        });
+        
+        // Intro narration
+        document.getElementById('playIntro').addEventListener('click', function() {
+            if (introNarration.paused) {
+                introNarration.play();
+                this.classList.add('active');
+                this.textContent = 'Stop Intro';
+            } else {
+                introNarration.pause();
+                introNarration.currentTime = 0;
+                this.classList.remove('active');
+                this.textContent = 'Play Intro';
+            }
+        });
+        
+        // Story music toggle
+        document.getElementById('toggleStory').addEventListener('click', function() {
+            if (storyMusic.paused) {
+                storyMusic.play();
+                this.classList.add('active');
+                this.textContent = 'Pause Story';
+                // Pause other music
+                ambientMusic.pause();
+                document.getElementById('toggleAmbient').classList.remove('active');
+                document.getElementById('toggleAmbient').textContent = 'Ambient Music';
+            } else {
+                storyMusic.pause();
+                this.classList.remove('active');
+                this.textContent = 'Story Music';
+            }
+        });
+        
+        // Remove active state when intro ends
+        introNarration.addEventListener('ended', function() {
+            document.getElementById('playIntro').classList.remove('active');
+            document.getElementById('playIntro').textContent = 'Play Intro';
+        });
+        
+        // Update last sync time
+        function updateSyncTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('last-update').textContent = timeString;
+        }
+        
+        // Update sync on data fetch
+        const originalFetchData = fetchGitHubData;
+        fetchGitHubData = async function() {
+            await originalFetchData();
+            updateSyncTime();
+            
+            // Update total issues count
+            try {
+                const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues?state=all&per_page=1`);
+                const linkHeader = response.headers.get('Link');
+                if (linkHeader) {
+                    const matches = linkHeader.match(/page=(\d+)>; rel="last"/);
+                    if (matches) {
+                        const lastPage = parseInt(matches[1]);
+                        const lastPageResponse = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues?state=all&page=${lastPage}&per_page=100`);
+                        const lastPageData = await lastPageResponse.json();
+                        const totalIssues = (lastPage - 1) * 100 + lastPageData.length;
+                        document.getElementById('total-issues').textContent = totalIssues;
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching total issues:', error);
+            }
+        };
+        
+        // Start with ambient music on page load (optional)
+        window.addEventListener('load', () => {
+            // Auto-play is often blocked by browsers, so we'll wait for user interaction
+            document.addEventListener('click', function initAudio() {
+                // Remove this listener after first click
+                document.removeEventListener('click', initAudio);
+            }, { once: true });
+        });
         
         fetchGitHubData();
         setInterval(fetchGitHubData, 30000);
