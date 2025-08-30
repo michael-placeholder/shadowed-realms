@@ -1218,7 +1218,7 @@
         
         <!-- Enhanced Tasks Container -->
         <div class="tasks-container" role="region" aria-label="Issue and Task Tracker">
-            <h2 class="tasks-header">Next Issues (Ascending Order 1→1000) - Each Has 4 Tasks</h2>
+            <h2 class="tasks-header">Next Issues (Ascending Order 1→1000)</h2>
             <div class="task-list" id="task-list">
                 <div class="loading">Summoning tasks from the void</div>
             </div>
@@ -1562,16 +1562,7 @@
                 const coins = extractCoinsFromLabels(issue.labels);
                 const revenue = coins * 10;
                 
-                // Calculate task numbers for this issue (ASCENDING)
-                const startTask = (issueNum - 1) * 4 + 1;
-                const endTask = startTask + 3;
-                
-                // Show tasks in ascending order
-                const taskList = [];
-                for (let t = startTask; t <= endTask; t++) {
-                    const taskType = ['Initial implementation', 'Testing and validation', 'Documentation', 'Integration'][(t - 1) % 4];
-                    taskList.push(`Task ${t}: ${taskType}`);
-                }
+                // Issues are standalone - not forcing arbitrary task counts
                 
                 // Determine deliverable type
                 let deliverable = 'Deliverable: ';
@@ -1590,18 +1581,9 @@
                 return `
                     <div class="task-item" tabindex="0" role="button" aria-label="Click to view issue details" onclick="window.open('${issue.html_url}', '_blank')">
                         <div style="background: var(--blood-red); color: #f0f0f0; padding: 5px; margin: -15px -15px 10px -15px; font-size: 0.8rem;">
-                            ISSUE #${issueNum} (Contains Tasks ${startTask}-${endTask})
+                            ISSUE #${issueNum}
                         </div>
                         <div class="task-title">${issue.title}</div>
-                        <div style="background: rgba(30,30,30,0.5); padding: 10px; margin: 10px 0; border-radius: 4px;">
-                            <strong>Tasks to Complete:</strong>
-                            <ul style="margin: 5px 0 0 20px; color: var(--soul-blue);">
-                                <li>Task ${startTask}: Initial implementation</li>
-                                <li>Task ${startTask + 1}: Testing and validation</li>
-                                <li>Task ${startTask + 2}: Documentation</li>
-                                <li>Task ${startTask + 3}: Integration</li>
-                            </ul>
-                        </div>
                         <div class="task-deliverable">${deliverable}</div>
                         <div class="task-value-explanation">
                             💰 Value: $${revenue} - Contributes to ${getRevenueStream(issue)} revenue stream
@@ -1765,7 +1747,7 @@
         setInterval(fetchGitHubData, 30000); // Refresh every 30 seconds
     </script>
     
-    <!-- GitHub REAL Data Handler with localStorage Cache -->
-    <script src="github-data-real.js"></script>
+    <!-- GitHub Authenticated Data Handler - Fetches REAL Issues -->
+    <script src="github-data-authenticated.js"></script>
 </body>
 </html>
