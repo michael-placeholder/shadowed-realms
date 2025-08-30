@@ -736,16 +736,27 @@
         
         async function fetchGitHubData() {
             try {
-                const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues?state=all&per_page=100`);
+                // Fetch more issues to get complete list
+                let allIssues = [];
+                let page = 1;
+                let hasMore = true;
                 
-                if (!response.ok) {
-                    throw new Error(`GitHub API error: ${response.status}`);
+                while (hasMore && page <= 5) { // Limit to 5 pages for safety
+                    const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues?state=all&per_page=100&page=${page}`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`GitHub API error: ${response.status}`);
+                    }
+                    
+                    const pageIssues = await response.json();
+                    allIssues = allIssues.concat(pageIssues);
+                    
+                    hasMore = pageIssues.length === 100;
+                    page++;
                 }
                 
-                const issues = await response.json();
-                
                 updateAPIStatus('Connected');
-                processIssues(issues);
+                processIssues(allIssues);
                 
             } catch (error) {
                 console.error('Error fetching GitHub data:', error);
@@ -770,20 +781,26 @@
         }
         
         function processIssues(issues) {
-            const openIssues = issues.filter(issue => issue.state === 'open');
-            const closedIssues = issues.filter(issue => issue.state === 'closed');
+            // Filter out non-Sprint 1 issues (the old animation issues)
+            const sprintIssues = issues.filter(issue => {
+                return issue.title.includes('[ISSUE-') && 
+                       issue.labels.some(label => label.name === 'sprint-1');
+            });
+            
+            const openIssues = sprintIssues.filter(issue => issue.state === 'open');
+            const closedIssues = sprintIssues.filter(issue => issue.state === 'closed');
             
             document.getElementById('open-tasks').textContent = openIssues.length;
             document.getElementById('closed-tasks').textContent = closedIssues.length;
             
-            const totalTasks = issues.length;
+            const totalTasks = sprintIssues.length;
             const progress = totalTasks > 0 ? Math.round((closedIssues.length / totalTasks) * 100) : 0;
             document.getElementById('sprint-progress').textContent = `${progress}%`;
             
             totalXP = 0;
             totalCoins = 0;
             
-            issues.forEach(issue => {
+            sprintIssues.forEach(issue => {
                 const xp = extractXPFromLabels(issue.labels);
                 const coins = extractCoinsFromLabels(issue.labels);
                 
@@ -796,10 +813,20 @@
             animateCounter('total-xp', totalXP);
             animateCounter('total-coins', totalCoins);
             
-            displayTasks(openIssues.slice(0, 10));
+            // Sort open issues by issue number (ascending - ISSUE-0001 first)
+            const sortedOpenIssues = openIssues.sort((a, b) => {
+                const numA = parseInt(a.title.match(/ISSUE-(\d+)/)?.[1] || '9999');
+                const numB = parseInt(b.title.match(/ISSUE-(\d+)/)?.[1] || '9999');
+                return numA - numB;
+            });
+            
+            displayTasks(sortedOpenIssues.slice(0, 10));
             
             const unlockedFragments = Math.floor(closedIssues.length / 5);
             displayMemoryFragments(unlockedFragments);
+            
+            // Update total issues count in sync panel
+            document.getElementById('total-issues').textContent = sprintIssues.length;
         }
         
         function extractXPFromLabels(labels) {
@@ -976,24 +1003,6 @@
         fetchGitHubData = async function() {
             await originalFetchData();
             updateSyncTime();
-            
-            // Update total issues count
-            try {
-                const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues?state=all&per_page=1`);
-                const linkHeader = response.headers.get('Link');
-                if (linkHeader) {
-                    const matches = linkHeader.match(/page=(\d+)>; rel="last"/);
-                    if (matches) {
-                        const lastPage = parseInt(matches[1]);
-                        const lastPageResponse = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues?state=all&page=${lastPage}&per_page=100`);
-                        const lastPageData = await lastPageResponse.json();
-                        const totalIssues = (lastPage - 1) * 100 + lastPageData.length;
-                        document.getElementById('total-issues').textContent = totalIssues;
-                    }
-                }
-            } catch (error) {
-                console.error('Error fetching total issues:', error);
-            }
         };
         
         // Start with ambient music on page load (optional)
