@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadowed Realms - Journey Through the Fog</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital@0;1&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --dark-souls-black: #0a0a0a;
+            --ember-orange: #cc7722;
+            --soul-blue: #6b8cae;
+            --estus-green: #7a9b7a;
+            --blood-red: #994444;
+            --fog-gray: #4a4a4a;
+            --abstract-purple: #8b7399;
+            --garden-gold: #c4a747;
+            --revenue-green: #6b9b7e;
+            --milestone-pink: #a67385;
+        }
+
+        /* Screen reader only content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* WCAG Accessibility - Focus Indicators */
+        *:focus-visible {
+            outline: 3px solid var(--garden-gold);
+            outline-offset: 2px;
+        }
+        
+        /* Skip to main content link */
+        .skip-to-main {
+            position: absolute;
+            left: -9999px;
+            z-index: 999;
+            background: var(--fog-gray);
+            color: var(--garden-gold);
+            padding: 8px;
+            text-decoration: none;
+        }
+        
+        .skip-to-main:focus {
+            left: 50%;
+            transform: translateX(-50%);
+            top: 10px;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1512 100%);
+            color: #d0d0d0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Bonfire Background */
+        .bonfire-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+            width: 200px;
+            height: 300px;
+        }
+
+        .bonfire-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ember {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #ff6b35;
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: emberFloat 4s infinite ease-out;
+            bottom: 0;
+        }
+
+        @keyframes emberFloat {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-300px) translateX(var(--drift));
+                opacity: 0;
+            }
+        }
+
+        /* Create 20 embers with random properties */
+        .ember:nth-child(1) { --drift: 20px; animation-delay: 0s; left: 45%; }
+        .ember:nth-child(2) { --drift: -15px; animation-delay: 0.5s; left: 50%; }
+        .ember:nth-child(3) { --drift: 25px; animation-delay: 1s; left: 55%; }
+        .ember:nth-child(4) { --drift: -20px; animation-delay: 1.5s; left: 48%; }
+        .ember:nth-child(5) { --drift: 30px; animation-delay: 2s; left: 52%; }
+        .ember:nth-child(6) { --drift: -25px; animation-delay: 0.3s; left: 47%; }
+        .ember:nth-child(7) { --drift: 15px; animation-delay: 0.7s; left: 53%; }
+        .ember:nth-child(8) { --drift: -30px; animation-delay: 1.3s; left: 46%; }
+        .ember:nth-child(9) { --drift: 22px; animation-delay: 1.7s; left: 54%; }
+        .ember:nth-child(10) { --drift: -18px; animation-delay: 2.3s; left: 49%; }
+
+        /* Main Dashboard Container */
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header with Souls Counter */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(10,10,10,0.95), rgba(30,20,10,0.85));
+            border-radius: 8px;
+            margin-bottom: 30px;
+            position: relative;
+            border: 2px solid var(--fog-gray);
+        }
+
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--garden-gold);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8fa4b8;
+            font-style: italic;
+        }
+
+        /* Souls Counter System */
+        .souls-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .souls-held, .humanity-counter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,0,0,0.7);
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: 1px solid var(--fog-gray);
+        }
+
+        .souls-icon, .humanity-icon {
+            font-size: 1.5rem;
+        }
+
+        .souls-value, .humanity-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--garden-gold);
+        }
+
+        /* Death Counter */
+        .death-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(10,10,10,0.9);
+            border: 2px solid var(--blood-red);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-family: 'Cinzel', serif;
+            color: var(--blood-red);
+            z-index: 100;
+        }
+
+        /* Boss Health Bar */
+        .boss-health-bar {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 1000;
+        }
+
+        .boss-health-bar.active {
+            opacity: 1;
+        }
+
+        .boss-name {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 10px;
+        }
+
+        .boss-health-container {
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #8b6914;
+            height: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .boss-health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8b0000, #ff0000);
+            transition: width 0.5s ease;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        /* Estus Flask */
+        .estus-flask {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(180deg, 
+                rgba(255,200,50,0.8) 0%,
+                rgba(255,150,0,0.9) 100%);
+            border-radius: 30% 30% 50% 50%;
+            border: 2px solid #8b6914;
+            box-shadow: 0 0 20px rgba(255,200,50,0.5);
+            cursor: pointer;
+            transition: transform 0.3s;
+            z-index: 100;
+        }
+
+        .estus-flask:hover {
+            transform: scale(1.1);
+        }
+
+        .estus-charges {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+
+        .estus-charge {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4a4a4a;
+            transition: all 0.3s;
+        }
+
+        .estus-charge.active {
+            background: #ffd700;
+            box-shadow: 0 0 5px #ffd700;
+        }
+
+        /* Fog Gate Transitions */
+        .section-transition {
+            position: relative;
+            height: 2px;
+            margin: 40px 0;
+            overflow: hidden;
+        }
+
+        .section-transition::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255,255,255,0.1) 45%,
+                rgba(255,255,255,0.3) 50%,
+                rgba(255,255,255,0.1) 55%,
+                transparent 100%);
+            animation: fogGateShimmer 3s infinite;
+        }
+
+        @keyframes fogGateShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(30,30,30,0.9), rgba(40,30,20,0.7));
+            border: 2px solid var(--fog-gray);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255,215,0,0.1), 
+                transparent);
+            transition: left 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a8a8a8;
+        }
+
+        /* Enhanced Task Items */
+        .task-item {
+            background: linear-gradient(135deg, 
+                rgba(10,10,10,0.9),
+                rgba(30,20,10,0.7));
+            border-left: 4px solid var(--ember-orange);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .task-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255,215,0,0.1), 
+                transparent);
+            transition: left 0.5s;
+        }
+
+        .task-item:hover::before {
+            left: 100%;
+        }
+
+        .task-item:hover {
+            transform: translateX(5px);
+            border-left-color: var(--garden-gold);
+        }
+
+        /* Souls-style Notifications */
+        .souls-notification {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            border: 2px solid var(--garden-gold);
+            padding: 20px 40px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--garden-gold);
+            text-align: center;
+            opacity: 0;
+            animation: notificationFade 3s ease-out;
+            z-index: 2000;
+            pointer-events: none;
+        }
+
+        @keyframes notificationFade {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+        }
+
+        /* Loading States */
+        .souls-loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 3000;
+        }
+
+        .loading-bonfire {
+            font-size: 3rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--garden-gold);
+        }
+
+        /* Covenant System */
+        .covenant-selector {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .covenant-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(0,0,0,0.8);
+            border: 2px solid var(--fog-gray);
+            border-radius: 4px;
+            font-family: 'Cinzel', serif;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .covenant-badge:hover {
+            border-color: var(--garden-gold);
+        }
+
+        /* Error States */
+        .error.souls-error {
+            background: rgba(10,10,10,0.95);
+            border: 2px solid var(--blood-red);
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .death-message {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: var(--blood-red);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 20px;
+        }
+
+        .error-subtitle {
+            font-size: 1.2rem;
+            color: #a8a8a8;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .retry-hint {
+            margin-top: 20px;
+            color: var(--garden-gold);
+            font-style: italic;
+        }
+
+        /* Lore Modal */
+        .lore-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5000;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .lore-content {
+            background: linear-gradient(135deg, rgba(20,20,20,0.95), rgba(40,30,20,0.9));
+            border: 3px solid var(--garden-gold);
+            padding: 40px;
+            max-width: 600px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .lore-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--garden-gold);
+            margin-bottom: 20px;
+        }
+
+        .lore-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #d0d0d0;
+            margin-bottom: 20px;
+        }
+
+        .lore-unlock {
+            color: var(--soul-blue);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .lore-close {
+            background: none;
+            border: 2px solid var(--garden-gold);
+            color: var(--garden-gold);
+            padding: 10px 30px;
+            font-family: 'Cinzel', serif;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lore-close:hover {
+            background: var(--garden-gold);
+            color: var(--dark-souls-black);
+        }
+
+        /* Praise the Sun Button */
+        .praise-sun-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .praise-sun-btn:hover {
+            transform: scale(1.2) rotate(15deg);
+            box-shadow: 0 0 30px rgba(255,215,0,0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard {
+                padding: 10px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .boss-health-bar {
+                width: 90%;
+            }
+            
+            .souls-counter {
+                position: static;
+                justify-content: center;
+                margin-top: 20px;
+            }
+        }
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .bonfire-container,
+            .estus-flask,
+            .death-counter,
+            .praise-sun-btn,
+            .covenant-selector {
+                display: none;
+            }
+            
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .dashboard {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-to-main">Skip to main content</a>
+    
+    <!-- Bonfire Particle Effects -->
+    <div class="bonfire-container">
+        <div class="bonfire-particles">
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+            <div class="ember"></div>
+        </div>
+    </div>
+
+    <!-- Boss Health Bar (Hidden by default) -->
+    <div class="boss-health-bar" id="boss-health-bar">
+        <div class="boss-name" id="boss-name">EPIC-001: Ideation & Documentation</div>
+        <div class="boss-health-container">
+            <div class="boss-health-fill" id="boss-health-fill" style="width: 75%;"></div>
+        </div>
+    </div>
+
+    <!-- Covenant Selector -->
+    <div class="covenant-selector">
+        <div class="covenant-badge" id="covenant-badge">
+            <span id="covenant-name">No Covenant</span>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard" id="main" role="main" aria-label="Project Dashboard">
+        <header class="header">
+            <h1 class="title">Shadowed Realms</h1>
+            <p class="subtitle">Journey Through the Fog - Sprint 1</p>
+            
+            <!-- Souls Counter -->
+            <div class="souls-counter">
+                <div class="souls-held">
+                    <span class="souls-icon">👻</span>
+                    <span class="souls-value" id="souls-value">0</span>
+                </div>
+                <div class="humanity-counter">
+                    <span class="humanity-icon">◉</span>
+                    <span class="humanity-value" id="humanity-value">0</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="section-transition"></div>
+
+        <!-- Stats Grid -->
+        <section class="stats-grid" role="region" aria-labelledby="stats-heading">
+            <h2 id="stats-heading" class="sr-only">Project Statistics</h2>
+            
+            <div class="stat-card">
+                <div class="stat-value" id="trials-total" style="color: var(--ember-orange);">1049</div>
+                <div class="stat-label">Total Trials</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-value" id="trials-conquered" style="color: var(--estus-green);">0</div>
+                <div class="stat-label">Trials Conquered</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-value" id="xp-total" style="color: var(--garden-gold);">0</div>
+                <div class="stat-label">Souls Collected</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-value" id="revenue-total" style="color: var(--revenue-green);">$0</div>
+                <div class="stat-label">Gold Earned</div>
+            </div>
+        </section>
+
+        <div class="section-transition"></div>
+
+        <!-- Task List -->
+        <section role="region" aria-labelledby="trials-heading">
+            <h2 id="trials-heading" style="font-family: 'Cinzel', serif; text-align: center; color: var(--garden-gold); margin-bottom: 20px;">
+                Next Trials to Face
+            </h2>
+            <div id="task-list" aria-live="polite">
+                <div class="souls-loading">
+                    <div class="loading-bonfire">🔥</div>
+                    <div class="loading-text">Kindling the flame...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Estus Flask -->
+    <div class="estus-flask" id="estus-flask" role="button" aria-label="Use Estus Flask">
+        <div class="estus-charges">
+            <div class="estus-charge active"></div>
+            <div class="estus-charge active"></div>
+            <div class="estus-charge active"></div>
+            <div class="estus-charge active"></div>
+            <div class="estus-charge active"></div>
+        </div>
+    </div>
+
+    <!-- Death Counter -->
+    <div class="death-counter">
+        Deaths: <span id="death-count">0</span>
+    </div>
+
+    <!-- Praise the Sun Button -->
+    <button class="praise-sun-btn" id="praise-sun" aria-label="Praise the Sun!">
+        ☀️
+    </button>
+
+    <!-- Screen reader announcer -->
+    <div role="status" aria-live="polite" aria-atomic="true" class="sr-only" id="announcer"></div>
+
+    <script>
+        // State Management
+        class DashboardState {
+            constructor() {
+                this.state = {
+                    issues: [],
+                    souls: 0,
+                    humanity: 0,
+                    deaths: parseInt(localStorage.getItem('deathCount') || 0),
+                    covenant: localStorage.getItem('covenant') || 'none',
+                    estusCharges: 5,
+                    currentBoss: null
+                };
+                this.listeners = [];
+            }
+            
+            setState(updates) {
+                this.state = { ...this.state, ...updates };
+                this.notify();
+            }
+            
+            subscribe(listener) {
+                this.listeners.push(listener);
+                return () => {
+                    this.listeners = this.listeners.filter(l => l !== listener);
+                };
+            }
+            
+            notify() {
+                this.listeners.forEach(listener => listener(this.state));
+            }
+        }
+
+        const dashboardState = new DashboardState();
+
+        // Lore Fragments
+        const LORE_FRAGMENTS = {
+            1: {
+                title: "The First Repository",
+                text: "In the beginning, there was darkness. Then came the repository, and with it, disparity. Heat and cold, life and death, and of course... bugs and features.",
+                unlockCondition: "Complete setup phase"
+            },
+            2: {
+                title: "The Undead Curse",
+                text: "Those who fail their sprints are branded with the darksign of technical debt. They wander eternally, refactoring code that can never be perfect.",
+                unlockCondition: "First asset published"
+            },
+            3: {
+                title: "Lords of Cinder",
+                text: "Four great codebases linked the fire, but now their flames fade. The Python Lord, the JavaScript King, the Rust Knight, and the Go Sage.",
+                unlockCondition: "Combat system complete"
+            }
+        };
+
+        // Covenant System
+        const COVENANTS = {
+            sunbros: {
+                name: "Warriors of Sunlight",
+                role: "Frontend Development",
+                color: "#ffd700",
+                bonus: "+20% XP for UI tasks"
+            },
+            darkwraiths: {
+                name: "Darkwraiths",
+                role: "Backend Development",
+                color: "#8b0000",
+                bonus: "+20% XP for system tasks"
+            },
+            dragons: {
+                name: "Path of the Dragon",
+                role: "Game Design",
+                color: "#4a3410",
+                bonus: "+20% XP for design tasks"
+            }
+        };
+
+        // Loading Messages
+        const LOADING_MESSAGES = [
+            "Kindling the flame...",
+            "Traversing the fog...",
+            "Restoring humanity...",
+            "Linking the repositories...",
+            "Summoning phantoms...",
+            "Reading soapstone messages...",
+            "Praising the sun..."
+        ];
+
+        // Fallback Data
+        const FALLBACK_DATA = {
+            totalIssues: 1049,
+            estimatedClosed: 0,
+            issueTemplates: [
+                { 
+                    number: 1,
+                    title: "[ISSUE-0001] Bonfire System Core", 
+                    state: "open",
+                    html_url: "https://github.com/michael-placeholder/shadowed-realms/issues/1",
+                    labels: [
+                        { name: "xp-50", color: "ffd700" },
+                        { name: "coins-25", color: "ff6b35" },
+                        { name: "system", color: "0e8a16" }
+                    ]
+                },
+                { 
+                    number: 2,
+                    title: "[ISSUE-0002] Estus Flask Mechanics", 
+                    state: "open",
+                    html_url: "https://github.com/michael-placeholder/shadowed-realms/issues/2",
+                    labels: [
+                        { name: "xp-40", color: "ffd700" },
+                        { name: "coins-20", color: "ff6b35" },
+                        { name: "mechanics", color: "d73a4a" }
+                    ]
+                }
+            ]
+        };
+
+        // GitHub Data Handler with Enhanced Error Handling
+        async function fetchGitHubData() {
+            const taskList = document.getElementById('task-list');
+            
+            // Show loading message
+            const randomMessage = LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)];
+            taskList.innerHTML = `
+                <div class="souls-loading">
+                    <div class="loading-bonfire">🔥</div>
+                    <div class="loading-text">${randomMessage}</div>
+                </div>
+            `;
+
+            try {
+                // Try to fetch real data
+                const response = await fetch(
+                    'https://api.github.com/repos/michael-placeholder/shadowed-realms/issues?state=all&per_page=100',
+                    {
+                        headers: {
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    }
+                );
+
+                if (response.status === 403 || response.status === 429) {
+                    throw new Error('Rate limited');
+                }
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const issues = await response.json();
+                
+                if (issues.length > 0) {
+                    dashboardState.setState({ issues });
+                    processIssues(issues);
+                } else {
+                    // Use fallback if no issues
+                    useFallbackData();
+                }
+
+            } catch (error) {
+                console.log('GitHub API error:', error.message);
+                
+                // Check localStorage cache
+                const cached = localStorage.getItem('github_issues_cache');
+                if (cached) {
+                    const data = JSON.parse(cached);
+                    if (Date.now() - data.timestamp < 3600000) { // 1 hour
+                        dashboardState.setState({ issues: data.issues });
+                        processIssues(data.issues);
+                        showNotification('Using cached trials');
+                        return;
+                    }
+                }
+                
+                // Use fallback data
+                useFallbackData();
+            }
+        }
+
+        function useFallbackData() {
+            const taskList = document.getElementById('task-list');
+            taskList.innerHTML = `
+                <div class="error souls-error">
+                    <div class="death-message">CONNECTION LOST</div>
+                    <div class="error-subtitle">The link of fire grows dim...</div>
+                    <p>Unable to reach the GitHub realm. The fog is too thick.</p>
+                    <div class="retry-hint">Rest at the bonfire to try again</div>
+                    <button onclick="fetchGitHubData()" style="margin-top: 20px; padding: 10px 20px; background: var(--ember-orange); border: none; color: white; cursor: pointer; border-radius: 4px;">
+                        Light Bonfire
+                    </button>
+                </div>
+            `;
+            
+            // Still show some stats from fallback
+            document.getElementById('trials-total').textContent = FALLBACK_DATA.totalIssues;
+        }
+
+        function processIssues(issues) {
+            // Cache the data
+            localStorage.setItem('github_issues_cache', JSON.stringify({
+                issues: issues,
+                timestamp: Date.now()
+            }));
+
+            // Update stats
+            const openIssues = issues.filter(i => i.state === 'open');
+            const closedIssues = issues.filter(i => i.state === 'closed');
+            
+            document.getElementById('trials-total').textContent = issues.length;
+            document.getElementById('trials-conquered').textContent = closedIssues.length;
+            
+            // Calculate souls and gold
+            let totalSouls = 0;
+            let totalGold = 0;
+            
+            issues.forEach(issue => {
+                const xp = extractXPFromLabels(issue.labels);
+                const coins = extractCoinsFromLabels(issue.labels);
+                if (issue.state === 'closed') {
+                    totalSouls += xp;
+                    totalGold += coins * 10;
+                }
+            });
+            
+            document.getElementById('xp-total').textContent = totalSouls.toLocaleString();
+            document.getElementById('revenue-total').textContent = `$${totalGold.toLocaleString()}`;
+            document.getElementById('souls-value').textContent = totalSouls.toLocaleString();
+            document.getElementById('humanity-value').textContent = Math.floor(totalSouls / 1000);
+            
+            dashboardState.setState({ 
+                souls: totalSouls,
+                humanity: Math.floor(totalSouls / 1000)
+            });
+            
+            // Display issues
+            displayTrials(openIssues.slice(0, 10));
+        }
+
+        function displayTrials(issues) {
+            const taskList = document.getElementById('task-list');
+            
+            if (issues.length === 0) {
+                taskList.innerHTML = '<div class="loading">No trials await... for now.</div>';
+                return;
+            }
+            
+            // Sort in ascending order
+            issues.sort((a, b) => {
+                const numA = parseInt(a.title.match(/\[ISSUE-(\d+)\]/)?.[1] || 9999);
+                const numB = parseInt(b.title.match(/\[ISSUE-(\d+)\]/)?.[1] || 9999);
+                return numA - numB;
+            });
+            
+            taskList.innerHTML = issues.map(issue => {
+                const issueNum = parseInt(issue.title.match(/\[ISSUE-(\d+)\]/)?.[1] || 0);
+                const xp = extractXPFromLabels(issue.labels);
+                const coins = extractCoinsFromLabels(issue.labels);
+                const revenue = coins * 10;
+                
+                return `
+                    <div class="task-item" tabindex="0" role="button" 
+                         aria-label="Trial ${issueNum}: Click to face this challenge"
+                         onclick="window.open('${issue.html_url}', '_blank')"
+                         onkeypress="if(event.key === 'Enter') window.open('${issue.html_url}', '_blank')">
+                        <div style="background: var(--blood-red); color: #f0f0f0; padding: 5px; margin: -20px -20px 10px -20px; font-size: 0.8rem; text-align: center;">
+                            TRIAL #${issueNum}
+                        </div>
+                        <div style="font-size: 1.2rem; margin-bottom: 10px; color: var(--garden-gold);">
+                            ${issue.title}
+                        </div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <span style="background: var(--soul-blue); padding: 4px 8px; border-radius: 4px;">
+                                +${xp} Souls
+                            </span>
+                            <span style="background: var(--ember-orange); padding: 4px 8px; border-radius: 4px;">
+                                +${coins} Humanity
+                            </span>
+                            <span style="background: var(--revenue-green); padding: 4px 8px; border-radius: 4px;">
+                                ${revenue} Gold
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function extractXPFromLabels(labels) {
+            if (!labels) return 0;
+            const xpLabel = labels.find(l => l.name.startsWith('xp-'));
+            return xpLabel ? parseInt(xpLabel.name.split('-')[1]) : 50;
+        }
+
+        function extractCoinsFromLabels(labels) {
+            if (!labels) return 0;
+            const coinsLabel = labels.find(l => l.name.startsWith('coins-'));
+            return coinsLabel ? parseInt(coinsLabel.name.split('-')[1]) : 25;
+        }
+
+        function showNotification(message, color = 'var(--garden-gold)') {
+            const notification = document.createElement('div');
+            notification.className = 'souls-notification';
+            notification.textContent = message;
+            notification.style.borderColor = color;
+            notification.style.color = color;
+            document.body.appendChild(notification);
+            
+            // Announce to screen readers
+            document.getElementById('announcer').textContent = message;
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function showBossHealthBar(bossName, health) {
+            const bossBar = document.getElementById('boss-health-bar');
+            const bossNameEl = document.getElementById('boss-name');
+            const bossFill = document.getElementById('boss-health-fill');
+            
+            bossNameEl.textContent = bossName;
+            bossFill.style.width = `${health}%`;
+            bossBar.classList.add('active');
+            
+            setTimeout(() => {
+                bossBar.classList.remove('active');
+            }, 5000);
+        }
+
+        function useEstusFlask() {
+            const charges = dashboardState.state.estusCharges;
+            if (charges > 0) {
+                dashboardState.setState({ estusCharges: charges - 1 });
+                showNotification('HP Restored');
+                updateEstusDisplay();
+            } else {
+                showNotification('No Estus charges remaining', 'var(--blood-red)');
+            }
+        }
+
+        function updateEstusDisplay() {
+            const charges = document.querySelectorAll('.estus-charge');
+            charges.forEach((charge, index) => {
+                if (index < dashboardState.state.estusCharges) {
+                    charge.classList.add('active');
+                } else {
+                    charge.classList.remove('active');
+                }
+            });
+        }
+
+        function praiseSun() {
+            showNotification('\\\\[T]/ PRAISE THE SUN!');
+            // Temporary sun effect
+            const sun = document.createElement('div');
+            sun.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 200px;
+                height: 200px;
+                background: radial-gradient(circle, rgba(255,215,0,0.8), transparent);
+                border-radius: 50%;
+                pointer-events: none;
+                animation: sunBurst 1s ease-out forwards;
+                z-index: 9999;
+            `;
+            document.body.appendChild(sun);
+            
+            setTimeout(() => sun.remove(), 1000);
+        }
+
+        function joinCovenant(covenantKey) {
+            const covenant = COVENANTS[covenantKey];
+            if (!covenant) return;
+            
+            localStorage.setItem('covenant', covenantKey);
+            dashboardState.setState({ covenant: covenantKey });
+            
+            document.getElementById('covenant-name').textContent = covenant.name;
+            document.getElementById('covenant-badge').style.borderColor = covenant.color;
+            
+            showNotification(`Covenant Joined: ${covenant.name}`);
+        }
+
+        function showLoreFragment(fragmentId) {
+            const fragment = LORE_FRAGMENTS[fragmentId];
+            if (!fragment) return;
+            
+            const modal = document.createElement('div');
+            modal.className = 'lore-modal';
+            modal.innerHTML = `
+                <div class="lore-content">
+                    <h3 class="lore-title">${fragment.title}</h3>
+                    <p class="lore-text">${fragment.text}</p>
+                    <div class="lore-unlock">Unlocked: ${fragment.unlockCondition}</div>
+                    <button class="lore-close" onclick="this.closest('.lore-modal').remove()">
+                        Touch the Darkness
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved state
+            document.getElementById('death-count').textContent = dashboardState.state.deaths;
+            
+            // Set up event listeners
+            document.getElementById('estus-flask').addEventListener('click', useEstusFlask);
+            document.getElementById('praise-sun').addEventListener('click', praiseSun);
+            
+            // Covenant selector
+            document.getElementById('covenant-badge').addEventListener('click', () => {
+                const covenants = Object.keys(COVENANTS);
+                const current = dashboardState.state.covenant;
+                const currentIndex = covenants.indexOf(current);
+                const next = covenants[(currentIndex + 1) % covenants.length];
+                joinCovenant(next);
+            });
+            
+            // Start fetching data
+            fetchGitHubData();
+            
+            // Refresh every 30 seconds
+            setInterval(fetchGitHubData, 30000);
+            
+            // Add global styles for sun burst animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes sunBurst {
+                    0% { 
+                        width: 0; 
+                        height: 0; 
+                        opacity: 1; 
+                    }
+                    100% { 
+                        width: 500px; 
+                        height: 500px; 
+                        opacity: 0; 
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'r' && e.ctrlKey) {
+                e.preventDefault();
+                fetchGitHubData();
+            }
+            if (e.key === 'e') {
+                useEstusFlask();
+            }
+            if (e.key === 'p') {
+                praiseSun();
+            }
+        });
+
+        // Track deaths on errors
+        window.addEventListener('error', () => {
+            const deaths = dashboardState.state.deaths + 1;
+            dashboardState.setState({ deaths });
+            localStorage.setItem('deathCount', deaths);
+            document.getElementById('death-count').textContent = deaths;
+        });
+    </script>
+</body>
+</html>
