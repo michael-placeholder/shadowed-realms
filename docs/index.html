@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadowed Realms - FromSoft Abstract Gardens</title>
+    <title>Shadowed Realms - Professional RPG Development Platform</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital@0;1&display=swap');
         
@@ -22,6 +22,8 @@
             --fog-gray: #2a2a2a;
             --abstract-purple: #6b46c1;
             --garden-gold: #ffd700;
+            --revenue-green: #00ff88;
+            --milestone-pink: #ff69b4;
         }
         
         body {
@@ -92,7 +94,7 @@
         }
         
         .dashboard {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
@@ -147,6 +149,368 @@
             opacity: 0.9;
         }
         
+        /* Revenue Tracker */
+        .revenue-tracker {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(42, 42, 42, 0.9));
+            border: 2px solid var(--revenue-green);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .revenue-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--revenue-green);
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+        
+        .revenue-target {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--garden-gold);
+            margin-bottom: 20px;
+        }
+        
+        .revenue-progress-bar {
+            background: rgba(42, 42, 42, 0.8);
+            border-radius: 20px;
+            height: 40px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .revenue-progress-fill {
+            background: linear-gradient(90deg, var(--revenue-green), var(--garden-gold));
+            height: 100%;
+            width: 0%;
+            transition: width 2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-souls-black);
+            font-weight: bold;
+        }
+        
+        .revenue-streams {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .revenue-stream {
+            background: rgba(10, 10, 10, 0.7);
+            border-left: 3px solid var(--revenue-green);
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        .stream-name {
+            font-size: 0.9rem;
+            color: var(--soul-blue);
+            margin-bottom: 5px;
+        }
+        
+        .stream-value {
+            font-size: 1.2rem;
+            color: var(--revenue-green);
+            font-weight: bold;
+        }
+        
+        /* Sprint Tracker */
+        .sprint-tracker {
+            background: rgba(42, 42, 42, 0.9);
+            border: 2px solid var(--abstract-purple);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .sprint-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: var(--abstract-purple);
+            margin-bottom: 20px;
+        }
+        
+        .sprint-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .sprint-stat {
+            background: rgba(10, 10, 10, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--abstract-purple);
+        }
+        
+        .sprint-label {
+            color: var(--soul-blue);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .sprint-value {
+            color: var(--garden-gold);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .velocity-chart {
+            background: rgba(10, 10, 10, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            height: 150px;
+            position: relative;
+        }
+        
+        /* Skill Mastery Tracker */
+        .skill-mastery {
+            background: linear-gradient(135deg, rgba(107, 70, 193, 0.2), rgba(42, 42, 42, 0.9));
+            border: 2px solid var(--abstract-purple);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .skill-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: var(--abstract-purple);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .skill-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-category {
+            background: rgba(10, 10, 10, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--abstract-purple);
+        }
+        
+        .skill-name {
+            color: var(--garden-gold);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .skill-progress-bar {
+            background: rgba(42, 42, 42, 0.8);
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        
+        .skill-progress-fill {
+            background: linear-gradient(90deg, var(--abstract-purple), var(--garden-gold));
+            height: 100%;
+            transition: width 1s ease;
+        }
+        
+        .skill-tasks {
+            font-size: 0.85rem;
+            color: var(--soul-blue);
+        }
+        
+        /* Enhanced Memory Fragments - Milestone Based */
+        .memory-fragments {
+            background: linear-gradient(135deg, 
+                rgba(255, 105, 180, 0.1), 
+                rgba(10, 10, 10, 0.9));
+            border: 2px solid var(--milestone-pink);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .memory-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--milestone-pink);
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+        }
+        
+        .milestone-tracker {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .milestone {
+            background: rgba(42, 42, 42, 0.8);
+            border: 1px solid var(--milestone-pink);
+            border-radius: 8px;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .milestone.completed {
+            background: linear-gradient(135deg, rgba(255, 105, 180, 0.2), rgba(42, 42, 42, 0.8));
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+        }
+        
+        .milestone-name {
+            color: var(--garden-gold);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .milestone-description {
+            color: var(--soul-blue);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .milestone-fragments {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .fragment-mini {
+            width: 30px;
+            height: 30px;
+            background: rgba(42, 42, 42, 0.8);
+            border: 1px solid var(--milestone-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--milestone-pink);
+        }
+        
+        .fragment-mini.unlocked {
+            background: linear-gradient(135deg, var(--milestone-pink), var(--garden-gold));
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.6);
+            animation: fragmentPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes fragmentPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Deliverable Tracker */
+        .deliverable-tracker {
+            background: rgba(42, 42, 42, 0.9);
+            border: 2px solid var(--estus-green);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .deliverable-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: var(--estus-green);
+            margin-bottom: 20px;
+        }
+        
+        .deliverable-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .deliverable-type {
+            background: rgba(10, 10, 10, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid var(--estus-green);
+        }
+        
+        .deliverable-name {
+            color: var(--soul-blue);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .deliverable-count {
+            color: var(--estus-green);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        /* Agile Ceremonies */
+        .agile-ceremonies {
+            background: rgba(42, 42, 42, 0.9);
+            border: 2px solid var(--ember-orange);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .ceremony-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            color: var(--ember-orange);
+            margin-bottom: 20px;
+        }
+        
+        .ceremony-list {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .ceremony {
+            background: rgba(10, 10, 10, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--ember-orange);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ceremony-name {
+            color: var(--garden-gold);
+            font-weight: bold;
+        }
+        
+        .ceremony-status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+        
+        .ceremony-status.completed {
+            background: var(--estus-green);
+            color: white;
+        }
+        
+        .ceremony-status.upcoming {
+            background: var(--ember-orange);
+            color: white;
+        }
+        
+        .ceremony-status.in-progress {
+            background: var(--soul-blue);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Connection Status */
         .connection-status {
             background: rgba(42, 42, 42, 0.9);
             border: 1px solid var(--abstract-purple);
@@ -195,53 +559,7 @@
             50% { transform: scale(1.2); opacity: 0.7; }
         }
         
-        .souls-counter {
-            background: linear-gradient(135deg, 
-                rgba(10, 10, 10, 0.95), 
-                rgba(42, 42, 42, 0.95));
-            border: 2px solid var(--garden-gold);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .souls-counter::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, 
-                rgba(255, 215, 0, 0.1) 0%, 
-                transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-        
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .souls-label {
-            font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            color: var(--garden-gold);
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-        
-        .souls-value {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--ember-orange);
-            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
-            font-family: 'Cinzel', serif;
-        }
-        
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -267,24 +585,6 @@
             border-color: var(--garden-gold);
         }
         
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, 
-                var(--ember-orange), 
-                var(--soul-blue));
-            animation: slideGradient 3s ease-in-out infinite;
-        }
-        
-        @keyframes slideGradient {
-            0%, 100% { transform: translateX(-100%); }
-            50% { transform: translateX(100%); }
-        }
-        
         .stat-label {
             font-size: 0.9rem;
             color: var(--soul-blue);
@@ -307,6 +607,7 @@
             font-style: italic;
         }
         
+        /* Tasks Container */
         .tasks-container {
             background: rgba(42, 42, 42, 0.9);
             border: 1px solid var(--abstract-purple);
@@ -366,6 +667,19 @@
             margin-bottom: 5px;
         }
         
+        .task-deliverable {
+            color: var(--estus-green);
+            font-size: 0.9rem;
+            margin: 5px 0;
+        }
+        
+        .task-value-explanation {
+            color: var(--revenue-green);
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 5px 0;
+        }
+        
         .task-labels {
             display: flex;
             flex-wrap: wrap;
@@ -394,88 +708,13 @@
             border-color: var(--ember-orange);
         }
         
-        .memory-fragments {
-            background: linear-gradient(135deg, 
-                rgba(107, 70, 193, 0.1), 
-                rgba(10, 10, 10, 0.9));
-            border: 2px solid var(--abstract-purple);
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            position: relative;
+        .task-label.revenue {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--revenue-green);
+            border-color: var(--revenue-green);
         }
         
-        .memory-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
-            color: var(--abstract-purple);
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(107, 70, 193, 0.5);
-        }
-        
-        .fragments-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        
-        .fragment {
-            width: 50px;
-            height: 50px;
-            background: rgba(42, 42, 42, 0.8);
-            border: 2px solid var(--abstract-purple);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cinzel', serif;
-            color: var(--abstract-purple);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .fragment.unlocked {
-            background: linear-gradient(135deg, 
-                var(--abstract-purple), 
-                var(--garden-gold));
-            color: white;
-            box-shadow: 0 0 20px rgba(107, 70, 193, 0.6);
-            animation: fragmentPulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes fragmentPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: var(--soul-blue);
-        }
-        
-        .loading::after {
-            content: '...';
-            animation: dots 1.5s steps(4, end) infinite;
-        }
-        
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60%, 100% { content: '...'; }
-        }
-        
-        .error {
-            color: var(--blood-red);
-            text-align: center;
-            padding: 20px;
-            background: rgba(139, 0, 0, 0.1);
-            border: 1px solid var(--blood-red);
-            border-radius: 4px;
-        }
-        
+        /* Audio Controls */
         .audio-controls {
             position: fixed;
             bottom: 20px;
@@ -535,6 +774,7 @@
             accent-color: var(--garden-gold);
         }
         
+        /* Sync Status */
         .sync-status {
             position: fixed;
             top: 20px;
@@ -563,30 +803,30 @@
             50% { opacity: 0.5; transform: scale(1.2); }
         }
         
-        .project-sync-info {
-            background: rgba(107, 70, 193, 0.1);
-            border: 1px solid var(--abstract-purple);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 20px 0;
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: var(--soul-blue);
         }
         
-        .sync-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
         }
         
-        .sync-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
         }
         
-        .sync-icon {
-            color: var(--estus-green);
+        .error {
+            color: var(--blood-red);
+            text-align: center;
+            padding: 20px;
+            background: rgba(139, 0, 0, 0.1);
+            border: 1px solid var(--blood-red);
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -631,9 +871,231 @@
     <div class="dashboard">
         <header class="header">
             <h1>SHADOWED REALMS</h1>
-            <p class="subtitle">An Abstract Garden of Souls</p>
+            <p class="subtitle">Professional RPG Development Platform - $50K Target | $117K Potential</p>
         </header>
         
+        <!-- Revenue Tracker -->
+        <div class="revenue-tracker">
+            <h2 class="revenue-header">Revenue Progress Tracker</h2>
+            <div class="revenue-target">Conservative: $27.5K | Target: $50K | Optimistic: $117K</div>
+            <div class="revenue-progress-bar">
+                <div class="revenue-progress-fill" id="revenue-fill">
+                    <span id="revenue-percentage">0%</span>
+                </div>
+            </div>
+            <div class="revenue-streams">
+                <div class="revenue-stream">
+                    <div class="stream-name">Game Sales</div>
+                    <div class="stream-value" id="game-revenue">$0 / $16,745</div>
+                </div>
+                <div class="revenue-stream">
+                    <div class="stream-name">Asset Sales</div>
+                    <div class="stream-value" id="asset-revenue">$0 / $65,000</div>
+                </div>
+                <div class="revenue-stream">
+                    <div class="stream-name">Scripts & Tools</div>
+                    <div class="stream-value" id="script-revenue">$0 / $45,000</div>
+                </div>
+                <div class="revenue-stream">
+                    <div class="stream-name">Education</div>
+                    <div class="stream-value" id="edu-revenue">$0 / $9,915</div>
+                </div>
+                <div class="revenue-stream">
+                    <div class="stream-name">TCG Sales</div>
+                    <div class="stream-value" id="tcg-revenue">$0 / $9,000</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sprint Tracker -->
+        <div class="sprint-tracker">
+            <h2 class="sprint-header">Sprint 1: Foundation & Core Systems</h2>
+            <div class="sprint-info">
+                <div class="sprint-stat">
+                    <div class="sprint-label">Sprint Day</div>
+                    <div class="sprint-value" id="sprint-day">1 / 60</div>
+                </div>
+                <div class="sprint-stat">
+                    <div class="sprint-label">Daily Velocity</div>
+                    <div class="sprint-value" id="daily-velocity">0 / 28</div>
+                </div>
+                <div class="sprint-stat">
+                    <div class="sprint-label">Sprint Progress</div>
+                    <div class="sprint-value" id="sprint-progress-value">0%</div>
+                </div>
+                <div class="sprint-stat">
+                    <div class="sprint-label">Story Points</div>
+                    <div class="sprint-value" id="story-points">0 / 1680</div>
+                </div>
+            </div>
+            <div class="velocity-chart" id="velocity-chart">
+                <!-- Velocity chart will be rendered here -->
+            </div>
+        </div>
+        
+        <!-- Agile Ceremonies -->
+        <div class="agile-ceremonies">
+            <h2 class="ceremony-header">Agile Ceremonies</h2>
+            <div class="ceremony-list">
+                <div class="ceremony">
+                    <span class="ceremony-name">Sprint Planning</span>
+                    <span class="ceremony-status completed">Completed</span>
+                </div>
+                <div class="ceremony">
+                    <span class="ceremony-name">Daily Standup</span>
+                    <span class="ceremony-status in-progress">In Progress</span>
+                </div>
+                <div class="ceremony">
+                    <span class="ceremony-name">Sprint Review</span>
+                    <span class="ceremony-status upcoming">Day 55</span>
+                </div>
+                <div class="ceremony">
+                    <span class="ceremony-name">Sprint Retrospective</span>
+                    <span class="ceremony-status upcoming">Day 58</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Skill Mastery Tracker -->
+        <div class="skill-mastery">
+            <h2 class="skill-header">Skill Mastery Progress (63 Skills)</h2>
+            <div class="skill-categories">
+                <div class="skill-category">
+                    <div class="skill-name">3D Modeling Path</div>
+                    <div class="skill-progress-bar">
+                        <div class="skill-progress-fill" style="width: 0%" id="modeling-progress"></div>
+                    </div>
+                    <div class="skill-tasks">0 / 500 tasks completed</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-name">Programming Path</div>
+                    <div class="skill-progress-bar">
+                        <div class="skill-progress-fill" style="width: 0%" id="programming-progress"></div>
+                    </div>
+                    <div class="skill-tasks">0 / 500 tasks completed</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-name">Game Design Path</div>
+                    <div class="skill-progress-bar">
+                        <div class="skill-progress-fill" style="width: 0%" id="design-progress"></div>
+                    </div>
+                    <div class="skill-tasks">0 / 300 tasks completed</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-name">Business Path</div>
+                    <div class="skill-progress-bar">
+                        <div class="skill-progress-fill" style="width: 0%" id="business-progress"></div>
+                    </div>
+                    <div class="skill-tasks">0 / 200 tasks completed</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-name">Animation Path</div>
+                    <div class="skill-progress-bar">
+                        <div class="skill-progress-fill" style="width: 0%" id="animation-progress"></div>
+                    </div>
+                    <div class="skill-tasks">0 / 400 tasks completed</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-name">Audio Path</div>
+                    <div class="skill-progress-bar">
+                        <div class="skill-progress-fill" style="width: 0%" id="audio-progress"></div>
+                    </div>
+                    <div class="skill-tasks">0 / 200 tasks completed</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Enhanced Memory Fragments - Milestone Based -->
+        <div class="memory-fragments">
+            <h2 class="memory-title">Memory Fragments - Milestone Unlocks</h2>
+            <div class="milestone-tracker">
+                <div class="milestone" id="milestone-1">
+                    <div class="milestone-name">Sprint 1 Setup Complete</div>
+                    <div class="milestone-description">Issues 1-160 completed</div>
+                    <div class="milestone-fragments">
+                        <div class="fragment-mini" id="frag-1">1</div>
+                        <div class="fragment-mini" id="frag-2">2</div>
+                        <div class="fragment-mini" id="frag-3">3</div>
+                        <div class="fragment-mini" id="frag-4">4</div>
+                        <div class="fragment-mini" id="frag-5">5</div>
+                        <div class="fragment-mini" id="frag-6">6</div>
+                        <div class="fragment-mini" id="frag-7">7</div>
+                    </div>
+                </div>
+                <div class="milestone" id="milestone-2">
+                    <div class="milestone-name">First Asset Published</div>
+                    <div class="milestone-description">Character system complete (161-300)</div>
+                    <div class="milestone-fragments">
+                        <div class="fragment-mini" id="frag-8">8</div>
+                        <div class="fragment-mini" id="frag-9">9</div>
+                        <div class="fragment-mini" id="frag-10">10</div>
+                        <div class="fragment-mini" id="frag-11">11</div>
+                        <div class="fragment-mini" id="frag-12">12</div>
+                        <div class="fragment-mini" id="frag-13">13</div>
+                        <div class="fragment-mini" id="frag-14">14</div>
+                    </div>
+                </div>
+                <div class="milestone" id="milestone-3">
+                    <div class="milestone-name">Combat System Complete</div>
+                    <div class="milestone-description">Issues 301-480 completed</div>
+                    <div class="milestone-fragments">
+                        <div class="fragment-mini" id="frag-15">15</div>
+                        <div class="fragment-mini" id="frag-16">16</div>
+                        <div class="fragment-mini" id="frag-17">17</div>
+                        <div class="fragment-mini" id="frag-18">18</div>
+                        <div class="fragment-mini" id="frag-19">19</div>
+                        <div class="fragment-mini" id="frag-20">20</div>
+                        <div class="fragment-mini" id="frag-21">21</div>
+                    </div>
+                </div>
+                <div class="milestone" id="milestone-4">
+                    <div class="milestone-name">Environment System Done</div>
+                    <div class="milestone-description">Issues 481-640 completed</div>
+                    <div class="milestone-fragments">
+                        <div class="fragment-mini" id="frag-22">22</div>
+                        <div class="fragment-mini" id="frag-23">23</div>
+                        <div class="fragment-mini" id="frag-24">24</div>
+                        <div class="fragment-mini" id="frag-25">25</div>
+                        <div class="fragment-mini" id="frag-26">26</div>
+                        <div class="fragment-mini" id="frag-27">27</div>
+                        <div class="fragment-mini" id="frag-28">28</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Deliverable Tracker -->
+        <div class="deliverable-tracker">
+            <h2 class="deliverable-header">Deliverables Completed</h2>
+            <div class="deliverable-stats">
+                <div class="deliverable-type">
+                    <div class="deliverable-name">Code Files</div>
+                    <div class="deliverable-count" id="code-deliverables">0</div>
+                </div>
+                <div class="deliverable-type">
+                    <div class="deliverable-name">3D Assets</div>
+                    <div class="deliverable-count" id="asset-deliverables">0</div>
+                </div>
+                <div class="deliverable-type">
+                    <div class="deliverable-name">Documentation</div>
+                    <div class="deliverable-count" id="doc-deliverables">0</div>
+                </div>
+                <div class="deliverable-type">
+                    <div class="deliverable-name">Animations</div>
+                    <div class="deliverable-count" id="anim-deliverables">0</div>
+                </div>
+                <div class="deliverable-type">
+                    <div class="deliverable-name">UI Elements</div>
+                    <div class="deliverable-count" id="ui-deliverables">0</div>
+                </div>
+                <div class="deliverable-type">
+                    <div class="deliverable-name">Audio Files</div>
+                    <div class="deliverable-count" id="audio-deliverables">0</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Connection Status -->
         <div class="connection-status">
             <div class="status-grid">
                 <div class="status-item">
@@ -655,41 +1117,7 @@
             </div>
         </div>
         
-        <div class="project-sync-info">
-            <h3 style="font-family: 'Cinzel', serif; color: var(--garden-gold); margin-bottom: 10px;">Project Synchronization</h3>
-            <div class="sync-details">
-                <div class="sync-item">
-                    <span class="sync-icon">✓</span>
-                    <span>Organization: michael-placeholder</span>
-                </div>
-                <div class="sync-item">
-                    <span class="sync-icon">✓</span>
-                    <span>Repository: shadowed-realms</span>
-                </div>
-                <div class="sync-item">
-                    <span class="sync-icon">✓</span>
-                    <span>Project Board: #1</span>
-                </div>
-                <div class="sync-item">
-                    <span class="sync-icon">✓</span>
-                    <span>Issues: <span id="total-issues">189</span></span>
-                </div>
-                <div class="sync-item">
-                    <span class="sync-icon">✓</span>
-                    <span>Auto-sync: Every 30s</span>
-                </div>
-                <div class="sync-item">
-                    <span class="sync-icon">✓</span>
-                    <span>Last Update: <span id="last-update">Now</span></span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="souls-counter">
-            <div class="souls-label">TOTAL SOULS COLLECTED</div>
-            <div class="souls-value" id="total-xp">0</div>
-        </div>
-        
+        <!-- Stats Grid -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-label">Open Tasks</div>
@@ -702,27 +1130,22 @@
                 <div class="stat-description">Victories claimed</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Total Coins</div>
-                <div class="stat-value" id="total-coins">0</div>
-                <div class="stat-description">Treasure accumulated</div>
+                <div class="stat-label">Total XP</div>
+                <div class="stat-value" id="total-xp">0</div>
+                <div class="stat-description">Experience gained</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Sprint Progress</div>
-                <div class="stat-value" id="sprint-progress">0%</div>
-                <div class="stat-description">Journey to completion</div>
+                <div class="stat-label">Total Coins</div>
+                <div class="stat-value" id="total-coins">0</div>
+                <div class="stat-description">Value created</div>
             </div>
         </div>
         
+        <!-- Enhanced Tasks Container -->
         <div class="tasks-container">
-            <h2 class="tasks-header">Available Quests</h2>
+            <h2 class="tasks-header">Available Quests with Deliverables</h2>
             <div class="task-list" id="task-list">
                 <div class="loading">Summoning tasks from the void</div>
-            </div>
-        </div>
-        
-        <div class="memory-fragments">
-            <h2 class="memory-title">Memory Fragments</h2>
-            <div class="fragments-grid" id="fragments-grid">
             </div>
         </div>
     </div>
@@ -733,15 +1156,36 @@
         
         let totalXP = 0;
         let totalCoins = 0;
+        let totalRevenue = 0;
+        
+        // Skill tracking
+        let skillProgress = {
+            modeling: 0,
+            programming: 0,
+            design: 0,
+            business: 0,
+            animation: 0,
+            audio: 0
+        };
+        
+        // Deliverable tracking
+        let deliverables = {
+            code: 0,
+            assets: 0,
+            docs: 0,
+            animations: 0,
+            ui: 0,
+            audio: 0
+        };
         
         async function fetchGitHubData() {
             try {
-                // Fetch more issues to get complete list
+                // Fetch all issues
                 let allIssues = [];
                 let page = 1;
                 let hasMore = true;
                 
-                while (hasMore && page <= 5) { // Limit to 5 pages for safety
+                while (hasMore && page <= 10) {
                     const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues?state=all&per_page=100&page=${page}`);
                     
                     if (!response.ok) {
@@ -781,7 +1225,7 @@
         }
         
         function processIssues(issues) {
-            // Filter out non-Sprint 1 issues (the old animation issues)
+            // Filter Sprint 1 issues
             const sprintIssues = issues.filter(issue => {
                 return issue.title.includes('[ISSUE-') && 
                        issue.labels.some(label => label.name === 'sprint-1');
@@ -790,43 +1234,48 @@
             const openIssues = sprintIssues.filter(issue => issue.state === 'open');
             const closedIssues = sprintIssues.filter(issue => issue.state === 'closed');
             
+            // Update basic stats
             document.getElementById('open-tasks').textContent = openIssues.length;
             document.getElementById('closed-tasks').textContent = closedIssues.length;
             
-            const totalTasks = sprintIssues.length;
-            const progress = totalTasks > 0 ? Math.round((closedIssues.length / totalTasks) * 100) : 0;
-            document.getElementById('sprint-progress').textContent = `${progress}%`;
-            
+            // Calculate XP and Coins
             totalXP = 0;
             totalCoins = 0;
             
-            sprintIssues.forEach(issue => {
+            closedIssues.forEach(issue => {
                 const xp = extractXPFromLabels(issue.labels);
                 const coins = extractCoinsFromLabels(issue.labels);
+                totalXP += xp;
+                totalCoins += coins;
                 
-                if (issue.state === 'closed') {
-                    totalXP += xp;
-                    totalCoins += coins;
-                }
+                // Update skill progress based on labels
+                updateSkillProgress(issue.labels, true);
+                
+                // Update deliverables based on issue type
+                updateDeliverables(issue);
             });
             
-            animateCounter('total-xp', totalXP);
-            animateCounter('total-coins', totalCoins);
+            document.getElementById('total-xp').textContent = totalXP.toLocaleString();
+            document.getElementById('total-coins').textContent = totalCoins.toLocaleString();
             
-            // Sort open issues by issue number (ascending - ISSUE-0001 first)
-            const sortedOpenIssues = openIssues.sort((a, b) => {
-                const numA = parseInt(a.title.match(/ISSUE-(\d+)/)?.[1] || '9999');
-                const numB = parseInt(b.title.match(/ISSUE-(\d+)/)?.[1] || '9999');
-                return numA - numB;
-            });
+            // Calculate revenue (coins * 10 = dollar value)
+            totalRevenue = totalCoins * 10;
+            updateRevenueDisplay();
             
-            displayTasks(sortedOpenIssues.slice(0, 10));
+            // Update sprint progress
+            updateSprintProgress(sprintIssues.length, closedIssues.length);
             
-            const unlockedFragments = Math.floor(closedIssues.length / 5);
-            displayMemoryFragments(unlockedFragments);
+            // Update milestone-based memory fragments
+            updateMemoryFragments(closedIssues);
             
-            // Update total issues count in sync panel
-            document.getElementById('total-issues').textContent = sprintIssues.length;
+            // Display tasks with enhanced information
+            displayEnhancedTasks(openIssues.slice(0, 10));
+            
+            // Update skill mastery displays
+            updateSkillMasteryDisplay();
+            
+            // Update deliverable counts
+            updateDeliverableDisplay();
         }
         
         function extractXPFromLabels(labels) {
@@ -849,24 +1298,149 @@
             return 10;
         }
         
-        function animateCounter(elementId, targetValue) {
-            const element = document.getElementById(elementId);
-            const duration = 2000;
-            const start = parseInt(element.textContent) || 0;
-            const increment = (targetValue - start) / (duration / 16);
-            let current = start;
+        function updateRevenueDisplay() {
+            const revenuePercentage = (totalRevenue / 50000) * 100;
+            const revenueFill = document.getElementById('revenue-fill');
+            const revenuePercent = document.getElementById('revenue-percentage');
             
-            const timer = setInterval(() => {
-                current += increment;
-                if ((increment > 0 && current >= targetValue) || (increment < 0 && current <= targetValue)) {
-                    current = targetValue;
-                    clearInterval(timer);
-                }
-                element.textContent = Math.round(current);
-            }, 16);
+            revenueFill.style.width = Math.min(revenuePercentage, 100) + '%';
+            revenuePercent.textContent = revenuePercentage.toFixed(1) + '%';
+            
+            // Update revenue streams with aggregated financial data
+            // Values from AGGREGATED_FINANCIAL_ANALYSIS.md
+            document.getElementById('game-revenue').textContent = 
+                `$${Math.min(totalRevenue * 0.144, 16745).toFixed(0)} / $16,745`;
+            document.getElementById('asset-revenue').textContent = 
+                `$${Math.min(totalRevenue * 0.558, 65000).toFixed(0)} / $65,000`;
+            document.getElementById('script-revenue').textContent = 
+                `$${Math.min(totalRevenue * 0.387, 45000).toFixed(0)} / $45,000`;
+            document.getElementById('edu-revenue').textContent = 
+                `$${Math.min(totalRevenue * 0.085, 9915).toFixed(0)} / $9,915`;
+            document.getElementById('tcg-revenue').textContent = 
+                `$${Math.min(totalRevenue * 0.077, 9000).toFixed(0)} / $9,000`;
         }
         
-        function displayTasks(tasks) {
+        function updateSprintProgress(total, closed) {
+            const progress = total > 0 ? (closed / total) * 100 : 0;
+            document.getElementById('sprint-progress-value').textContent = progress.toFixed(1) + '%';
+            
+            // Calculate sprint day (simulated)
+            const startDate = new Date('2025-08-01');
+            const today = new Date();
+            const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+            document.getElementById('sprint-day').textContent = `${Math.min(daysPassed, 60)} / 60`;
+            
+            // Calculate daily velocity
+            const dailyVelocity = daysPassed > 0 ? Math.floor(closed / daysPassed) : 0;
+            document.getElementById('daily-velocity').textContent = `${dailyVelocity} / 28`;
+            
+            // Update story points
+            document.getElementById('story-points').textContent = `${closed} / 1000`;
+        }
+        
+        function updateMemoryFragments(closedIssues) {
+            // Milestone-based fragment unlocking
+            const closedCount = closedIssues.length;
+            
+            // Milestone 1: Issues 1-160 (Setup)
+            if (closedCount >= 160) {
+                document.getElementById('milestone-1').classList.add('completed');
+                for (let i = 1; i <= 7; i++) {
+                    document.getElementById(`frag-${i}`).classList.add('unlocked');
+                }
+            }
+            
+            // Milestone 2: Issues 161-300 (Character System)
+            if (closedCount >= 300) {
+                document.getElementById('milestone-2').classList.add('completed');
+                for (let i = 8; i <= 14; i++) {
+                    document.getElementById(`frag-${i}`).classList.add('unlocked');
+                }
+            }
+            
+            // Milestone 3: Issues 301-480 (Combat System)
+            if (closedCount >= 480) {
+                document.getElementById('milestone-3').classList.add('completed');
+                for (let i = 15; i <= 21; i++) {
+                    document.getElementById(`frag-${i}`).classList.add('unlocked');
+                }
+            }
+            
+            // Milestone 4: Issues 481-640 (Environment)
+            if (closedCount >= 640) {
+                document.getElementById('milestone-4').classList.add('completed');
+                for (let i = 22; i <= 28; i++) {
+                    document.getElementById(`frag-${i}`).classList.add('unlocked');
+                }
+            }
+        }
+        
+        function updateSkillProgress(labels, isCompleted) {
+            if (!isCompleted) return;
+            
+            labels.forEach(label => {
+                if (label.name.includes('3d-modeling')) skillProgress.modeling++;
+                if (label.name.includes('programming')) skillProgress.programming++;
+                if (label.name.includes('design')) skillProgress.design++;
+                if (label.name.includes('business')) skillProgress.business++;
+                if (label.name.includes('animation')) skillProgress.animation++;
+                if (label.name.includes('audio')) skillProgress.audio++;
+            });
+        }
+        
+        function updateSkillMasteryDisplay() {
+            // Update progress bars
+            document.getElementById('modeling-progress').style.width = 
+                Math.min((skillProgress.modeling / 500) * 100, 100) + '%';
+            document.getElementById('programming-progress').style.width = 
+                Math.min((skillProgress.programming / 500) * 100, 100) + '%';
+            document.getElementById('design-progress').style.width = 
+                Math.min((skillProgress.design / 300) * 100, 100) + '%';
+            document.getElementById('business-progress').style.width = 
+                Math.min((skillProgress.business / 200) * 100, 100) + '%';
+            document.getElementById('animation-progress').style.width = 
+                Math.min((skillProgress.animation / 400) * 100, 100) + '%';
+            document.getElementById('audio-progress').style.width = 
+                Math.min((skillProgress.audio / 200) * 100, 100) + '%';
+        }
+        
+        function updateDeliverables(issue) {
+            // Simulate deliverable tracking based on issue type
+            if (issue.title.toLowerCase().includes('script') || 
+                issue.title.toLowerCase().includes('code')) {
+                deliverables.code++;
+            }
+            if (issue.title.toLowerCase().includes('model') || 
+                issue.title.toLowerCase().includes('asset')) {
+                deliverables.assets++;
+            }
+            if (issue.title.toLowerCase().includes('doc') || 
+                issue.title.toLowerCase().includes('guide')) {
+                deliverables.docs++;
+            }
+            if (issue.title.toLowerCase().includes('anim')) {
+                deliverables.animations++;
+            }
+            if (issue.title.toLowerCase().includes('ui') || 
+                issue.title.toLowerCase().includes('interface')) {
+                deliverables.ui++;
+            }
+            if (issue.title.toLowerCase().includes('audio') || 
+                issue.title.toLowerCase().includes('sound')) {
+                deliverables.audio++;
+            }
+        }
+        
+        function updateDeliverableDisplay() {
+            document.getElementById('code-deliverables').textContent = deliverables.code;
+            document.getElementById('asset-deliverables').textContent = deliverables.assets;
+            document.getElementById('doc-deliverables').textContent = deliverables.docs;
+            document.getElementById('anim-deliverables').textContent = deliverables.animations;
+            document.getElementById('ui-deliverables').textContent = deliverables.ui;
+            document.getElementById('audio-deliverables').textContent = deliverables.audio;
+        }
+        
+        function displayEnhancedTasks(tasks) {
             const taskList = document.getElementById('task-list');
             
             if (tasks.length === 0) {
@@ -877,15 +1451,37 @@
             taskList.innerHTML = tasks.map(task => {
                 const xp = extractXPFromLabels(task.labels);
                 const coins = extractCoinsFromLabels(task.labels);
+                const revenue = coins * 10;
+                
+                // Determine deliverable type
+                let deliverable = 'Deliverable: ';
+                if (task.title.toLowerCase().includes('script')) {
+                    deliverable += '📄 Script file (.cs/.py/.js)';
+                } else if (task.title.toLowerCase().includes('model')) {
+                    deliverable += '🎨 3D Model (.fbx/.obj)';
+                } else if (task.title.toLowerCase().includes('doc')) {
+                    deliverable += '📚 Documentation (.md)';
+                } else if (task.title.toLowerCase().includes('anim')) {
+                    deliverable += '🎬 Animation file';
+                } else {
+                    deliverable += '📦 Project file';
+                }
                 
                 return `
                     <div class="task-item" onclick="window.open('${task.html_url}', '_blank')">
                         <div class="task-title">${task.title}</div>
+                        <div class="task-deliverable">${deliverable}</div>
+                        <div class="task-value-explanation">
+                            💰 Value: $${revenue} - Contributes to ${getRevenueStream(task)} revenue stream
+                        </div>
                         <div class="task-labels">
                             <span class="task-label xp">+${xp} XP</span>
                             <span class="task-label coins">+${coins} Coins</span>
+                            <span class="task-label revenue">$${revenue} value</span>
                             ${task.labels.map(label => 
-                                !label.name.includes('xp-') && !label.name.includes('coins-') 
+                                !label.name.includes('xp-') && 
+                                !label.name.includes('coins-') && 
+                                label.name !== 'sprint-1'
                                     ? `<span class="task-label">${label.name}</span>` 
                                     : ''
                             ).join('')}
@@ -895,22 +1491,20 @@
             }).join('');
         }
         
-        function displayMemoryFragments(unlocked) {
-            const grid = document.getElementById('fragments-grid');
-            const totalFragments = 49;
-            
-            grid.innerHTML = '';
-            
-            for (let i = 1; i <= totalFragments; i++) {
-                const fragment = document.createElement('div');
-                fragment.className = 'fragment';
-                if (i <= unlocked) {
-                    fragment.classList.add('unlocked');
-                }
-                fragment.textContent = i;
-                fragment.title = i <= unlocked ? `Fragment ${i}: Unlocked` : `Fragment ${i}: Locked`;
-                grid.appendChild(fragment);
+        function getRevenueStream(task) {
+            if (task.title.toLowerCase().includes('model') || 
+                task.title.toLowerCase().includes('asset')) {
+                return 'Asset Marketplace';
             }
+            if (task.title.toLowerCase().includes('script') || 
+                task.title.toLowerCase().includes('system')) {
+                return 'Scripts & Tools';
+            }
+            if (task.title.toLowerCase().includes('doc') || 
+                task.title.toLowerCase().includes('tutorial')) {
+                return 'Educational Content';
+            }
+            return 'Game Development';
         }
         
         function showError(message) {
@@ -924,19 +1518,16 @@
         const storyMusic = document.getElementById('storyMusic');
         const volumeSlider = document.getElementById('volumeSlider');
         
-        // Set initial volume - ambient music quieter, narration clearer
-        ambientMusic.volume = 0.15;  // Quieter background music
-        introNarration.volume = 0.5;  // Louder narration
-        storyMusic.volume = 0.2;      // Moderate story music
+        // Set initial volume
+        ambientMusic.volume = 0.15;
+        introNarration.volume = 0.5;
+        storyMusic.volume = 0.2;
         
-        // Volume control with proportional adjustment
+        // Volume control
         volumeSlider.addEventListener('input', (e) => {
             const baseVolume = e.target.value / 100;
-            // Keep ambient music at 30% of the base volume for background effect
             ambientMusic.volume = baseVolume * 0.3;
-            // Narration at full selected volume for clarity
             introNarration.volume = baseVolume;
-            // Story music at 40% for atmospheric background
             storyMusic.volume = baseVolume * 0.4;
         });
         
@@ -946,7 +1537,6 @@
                 ambientMusic.play();
                 this.classList.add('active');
                 this.textContent = 'Pause Ambient';
-                // Pause other music
                 storyMusic.pause();
                 document.getElementById('toggleStory').classList.remove('active');
                 document.getElementById('toggleStory').textContent = 'Story Music';
@@ -963,10 +1553,9 @@
         
         document.getElementById('playIntro').addEventListener('click', function() {
             if (introNarration.paused) {
-                // Duck background music when intro plays
                 originalAmbientVolume = ambientMusic.volume;
                 originalStoryVolume = storyMusic.volume;
-                ambientMusic.volume = ambientMusic.volume * 0.2; // Reduce to 20% of current
+                ambientMusic.volume = ambientMusic.volume * 0.2;
                 storyMusic.volume = storyMusic.volume * 0.2;
                 
                 introNarration.play();
@@ -978,7 +1567,6 @@
                 this.classList.remove('active');
                 this.textContent = 'Play Intro';
                 
-                // Restore original volumes
                 ambientMusic.volume = originalAmbientVolume;
                 storyMusic.volume = originalStoryVolume;
             }
@@ -990,7 +1578,6 @@
                 storyMusic.play();
                 this.classList.add('active');
                 this.textContent = 'Pause Story';
-                // Pause other music
                 ambientMusic.pause();
                 document.getElementById('toggleAmbient').classList.remove('active');
                 document.getElementById('toggleAmbient').textContent = 'Ambient Music';
@@ -1001,40 +1588,17 @@
             }
         });
         
-        // Remove active state when intro ends and restore volumes
+        // Remove active state when intro ends
         introNarration.addEventListener('ended', function() {
             document.getElementById('playIntro').classList.remove('active');
             document.getElementById('playIntro').textContent = 'Play Intro';
-            // Restore original volumes when intro ends
             ambientMusic.volume = originalAmbientVolume;
             storyMusic.volume = originalStoryVolume;
         });
         
-        // Update last sync time
-        function updateSyncTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            document.getElementById('last-update').textContent = timeString;
-        }
-        
-        // Update sync on data fetch
-        const originalFetchData = fetchGitHubData;
-        fetchGitHubData = async function() {
-            await originalFetchData();
-            updateSyncTime();
-        };
-        
-        // Start with ambient music on page load (optional)
-        window.addEventListener('load', () => {
-            // Auto-play is often blocked by browsers, so we'll wait for user interaction
-            document.addEventListener('click', function initAudio() {
-                // Remove this listener after first click
-                document.removeEventListener('click', initAudio);
-            }, { once: true });
-        });
-        
+        // Initialize
         fetchGitHubData();
-        setInterval(fetchGitHubData, 30000);
+        setInterval(fetchGitHubData, 30000); // Refresh every 30 seconds
     </script>
 </body>
 </html>
