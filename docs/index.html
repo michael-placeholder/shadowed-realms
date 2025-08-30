@@ -924,17 +924,20 @@
         const storyMusic = document.getElementById('storyMusic');
         const volumeSlider = document.getElementById('volumeSlider');
         
-        // Set initial volume
-        ambientMusic.volume = 0.3;
-        introNarration.volume = 0.3;
-        storyMusic.volume = 0.3;
+        // Set initial volume - ambient music quieter, narration clearer
+        ambientMusic.volume = 0.15;  // Quieter background music
+        introNarration.volume = 0.5;  // Louder narration
+        storyMusic.volume = 0.2;      // Moderate story music
         
-        // Volume control
+        // Volume control with proportional adjustment
         volumeSlider.addEventListener('input', (e) => {
-            const volume = e.target.value / 100;
-            ambientMusic.volume = volume;
-            introNarration.volume = volume;
-            storyMusic.volume = volume;
+            const baseVolume = e.target.value / 100;
+            // Keep ambient music at 30% of the base volume for background effect
+            ambientMusic.volume = baseVolume * 0.3;
+            // Narration at full selected volume for clarity
+            introNarration.volume = baseVolume;
+            // Story music at 40% for atmospheric background
+            storyMusic.volume = baseVolume * 0.4;
         });
         
         // Ambient music toggle
@@ -954,9 +957,18 @@
             }
         });
         
-        // Intro narration
+        // Intro narration with auto-ducking
+        let originalAmbientVolume = ambientMusic.volume;
+        let originalStoryVolume = storyMusic.volume;
+        
         document.getElementById('playIntro').addEventListener('click', function() {
             if (introNarration.paused) {
+                // Duck background music when intro plays
+                originalAmbientVolume = ambientMusic.volume;
+                originalStoryVolume = storyMusic.volume;
+                ambientMusic.volume = ambientMusic.volume * 0.2; // Reduce to 20% of current
+                storyMusic.volume = storyMusic.volume * 0.2;
+                
                 introNarration.play();
                 this.classList.add('active');
                 this.textContent = 'Stop Intro';
@@ -965,6 +977,10 @@
                 introNarration.currentTime = 0;
                 this.classList.remove('active');
                 this.textContent = 'Play Intro';
+                
+                // Restore original volumes
+                ambientMusic.volume = originalAmbientVolume;
+                storyMusic.volume = originalStoryVolume;
             }
         });
         
@@ -985,10 +1001,13 @@
             }
         });
         
-        // Remove active state when intro ends
+        // Remove active state when intro ends and restore volumes
         introNarration.addEventListener('ended', function() {
             document.getElementById('playIntro').classList.remove('active');
             document.getElementById('playIntro').textContent = 'Play Intro';
+            // Restore original volumes when intro ends
+            ambientMusic.volume = originalAmbientVolume;
+            storyMusic.volume = originalStoryVolume;
         });
         
         // Update last sync time
