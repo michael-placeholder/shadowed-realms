@@ -15,15 +15,15 @@
         
         :root {
             --dark-souls-black: #0a0a0a;
-            --ember-orange: #ff6b35;
-            --soul-blue: #4a90e2;
-            --estus-green: #7fb069;
-            --blood-red: #8b0000;
+            --ember-orange: #4a3410;
+            --soul-blue: #1e2838;
+            --estus-green: #2d3d2d;
+            --blood-red: #2a0a0a;
             --fog-gray: #2a2a2a;
-            --abstract-purple: #6b46c1;
-            --garden-gold: #ffd700;
-            --revenue-green: #00ff88;
-            --milestone-pink: #ff69b4;
+            --abstract-purple: #2d2438;
+            --garden-gold: #8b6914;
+            --revenue-green: #1a3d2e;
+            --milestone-pink: #4a2838;
         }
         
         body {
@@ -645,6 +645,17 @@
             border-radius: 4px;
         }
         
+        .issue-header {
+            background: var(--blood-red);
+            color: white;
+            padding: 5px 10px;
+            margin: -15px -15px 10px -15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
         .task-item {
             background: rgba(10, 10, 10, 0.7);
             border-left: 3px solid var(--ember-orange);
@@ -873,6 +884,13 @@
             <h1>SHADOWED REALMS</h1>
             <p class="subtitle">Professional RPG Development Platform - $50K Target | $117K Potential</p>
         </header>
+
+        <!-- XP and Coins Display -->
+        <div style="text-align: center; margin: 20px 0; color: var(--garden-gold);">
+            <span style="margin-right: 30px; font-size: 1.3rem;">Total XP: <span id="total-xp" style="font-weight: bold;">0</span></span>
+            <span style="font-size: 1.3rem;">Total Coins: <span id="total-coins" style="font-weight: bold;">0</span></span>
+        </div>
+
         
         <!-- Revenue Tracker -->
         <div class="revenue-tracker">
@@ -1120,30 +1138,30 @@
         <!-- Stats Grid -->
         <div class="stats-grid">
             <div class="stat-card">
+                <div class="stat-label">Open Issues</div>
+                <div class="stat-value" id="open-issues">0</div>
+                <div class="stat-description">Issues to complete</div>
+            </div>
+            <div class="stat-card">
                 <div class="stat-label">Open Tasks</div>
                 <div class="stat-value" id="open-tasks">0</div>
-                <div class="stat-description">Challenges await</div>
+                <div class="stat-description">Tasks remaining</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Closed Tasks</div>
-                <div class="stat-value" id="closed-tasks">0</div>
-                <div class="stat-description">Victories claimed</div>
+                <div class="stat-label">Closed Issues</div>
+                <div class="stat-value" id="closed-issues">0</div>
+                <div class="stat-description">Issues completed</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Total XP</div>
-                <div class="stat-value" id="total-xp">0</div>
-                <div class="stat-description">Experience gained</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Total Coins</div>
-                <div class="stat-value" id="total-coins">0</div>
-                <div class="stat-description">Value created</div>
+                <div class="stat-label">Completed Tasks</div>
+                <div class="stat-value" id="completed-tasks">0</div>
+                <div class="stat-description">Tasks finished</div>
             </div>
         </div>
         
         <!-- Enhanced Tasks Container -->
         <div class="tasks-container">
-            <h2 class="tasks-header">Available Quests with Deliverables</h2>
+            <h2 class="tasks-header">Next Issues to Complete (Each Has 4 Tasks)</h2>
             <div class="task-list" id="task-list">
                 <div class="loading">Summoning tasks from the void</div>
             </div>
@@ -1234,9 +1252,32 @@
             const openIssues = sprintIssues.filter(issue => issue.state === 'open');
             const closedIssues = sprintIssues.filter(issue => issue.state === 'closed');
             
-            // Update basic stats
-            document.getElementById('open-tasks').textContent = openIssues.length;
-            document.getElementById('closed-tasks').textContent = closedIssues.length;
+            // Update basic stats - ISSUES ARE NOT TASKS!
+            document.getElementById('open-issues').textContent = openIssues.length;
+            document.getElementById('closed-issues').textContent = closedIssues.length;
+            
+            // Each issue has 4 tasks
+            const openTaskCount = openIssues.length * 4;
+            const completedTaskCount = closedIssues.length * 4;
+            document.getElementById('open-tasks').textContent = openTaskCount;
+            document.getElementById('completed-tasks').textContent = completedTaskCount;
+            
+            // Add XP and Coins display back
+            const xpElement = document.getElementById('total-xp');
+            const coinsElement = document.getElementById('total-coins');
+            if (!xpElement) {
+                // Create XP/Coins display in header
+                const headerStats = document.querySelector('.epic-name') || document.querySelector('.dashboard-header');
+                if (headerStats) {
+                    const xpCoinsDiv = document.createElement('div');
+                    xpCoinsDiv.className = 'xp-coins-display';
+                    xpCoinsDiv.innerHTML = `
+                        <span class="xp-display">Total XP: <span id="total-xp">0</span></span>
+                        <span class="coins-display">Total Coins: <span id="total-coins">0</span></span>
+                    `;
+                    headerStats.parentNode.insertBefore(xpCoinsDiv, headerStats.nextSibling);
+                }
+            }
             
             // Calculate XP and Coins
             totalXP = 0;
@@ -1255,8 +1296,10 @@
                 updateDeliverables(issue);
             });
             
-            document.getElementById('total-xp').textContent = totalXP.toLocaleString();
-            document.getElementById('total-coins').textContent = totalCoins.toLocaleString();
+            const xpEl = document.getElementById('total-xp');
+            const coinsEl = document.getElementById('total-coins');
+            if (xpEl) xpEl.textContent = totalXP.toLocaleString();
+            if (coinsEl) coinsEl.textContent = totalCoins.toLocaleString();
             
             // Calculate revenue (coins * 10 = dollar value)
             totalRevenue = totalCoins * 10;
@@ -1325,9 +1368,9 @@
             document.getElementById('sprint-progress-value').textContent = progress.toFixed(1) + '%';
             
             // Calculate sprint day (simulated)
-            const startDate = new Date('2025-08-01');
+            const startDate = new Date(); // Sprint starts today
             const today = new Date();
-            const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+            const daysPassed = 1; // Day 1 of Sprint
             document.getElementById('sprint-day').textContent = `${Math.min(daysPassed, 60)} / 60`;
             
             // Calculate daily velocity
@@ -1440,45 +1483,73 @@
             document.getElementById('audio-deliverables').textContent = deliverables.audio;
         }
         
-        function displayEnhancedTasks(tasks) {
+        
+        function displayEnhancedTasks(issues) {
             const taskList = document.getElementById('task-list');
             
-            if (tasks.length === 0) {
-                taskList.innerHTML = '<div class="loading">No open tasks available</div>';
+            if (issues.length === 0) {
+                taskList.innerHTML = '<div class="loading">No open issues available</div>';
                 return;
             }
             
-            taskList.innerHTML = tasks.map(task => {
-                const xp = extractXPFromLabels(task.labels);
-                const coins = extractCoinsFromLabels(task.labels);
+            // Sort issues in ascending order
+            issues.sort((a, b) => {
+                const numA = parseInt(a.title.match(/\[ISSUE-(\d+)\]/)?.[1] || 0);
+                const numB = parseInt(b.title.match(/\[ISSUE-(\d+)\]/)?.[1] || 0);
+                return numA - numB;
+            });
+            
+            taskList.innerHTML = issues.map(issue => {
+                const issueNum = parseInt(issue.title.match(/\[ISSUE-(\d+)\]/)?.[1] || 0);
+                const xp = extractXPFromLabels(issue.labels);
+                const coins = extractCoinsFromLabels(issue.labels);
                 const revenue = coins * 10;
+                
+                // Calculate task numbers for this issue
+                const startTask = (issueNum - 1) * 4 + 1;
+                const endTask = startTask + 3;
                 
                 // Determine deliverable type
                 let deliverable = 'Deliverable: ';
-                if (task.title.toLowerCase().includes('script')) {
+                if (issue.title.toLowerCase().includes('script')) {
                     deliverable += '📄 Script file (.cs/.py/.js)';
-                } else if (task.title.toLowerCase().includes('model')) {
+                } else if (issue.title.toLowerCase().includes('model')) {
                     deliverable += '🎨 3D Model (.fbx/.obj)';
-                } else if (task.title.toLowerCase().includes('doc')) {
+                } else if (issue.title.toLowerCase().includes('doc')) {
                     deliverable += '📚 Documentation (.md)';
-                } else if (task.title.toLowerCase().includes('anim')) {
+                } else if (issue.title.toLowerCase().includes('anim')) {
                     deliverable += '🎬 Animation file';
                 } else {
                     deliverable += '📦 Project file';
                 }
                 
                 return `
-                    <div class="task-item" onclick="window.open('${task.html_url}', '_blank')">
-                        <div class="task-title">${task.title}</div>
+                    <div class="task-item" onclick="window.open('${issue.html_url}', '_blank')">
+                        <div style="background: var(--blood-red); color: white; padding: 5px; margin: -15px -15px 10px -15px; font-size: 0.8rem;">
+                            ISSUE #${issueNum} (Contains Tasks ${startTask}-${endTask})
+                        </div>
+                        <div class="task-title">${issue.title}</div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 10px; margin: 10px 0; border-radius: 4px;">
+                            <strong>Tasks to Complete:</strong>
+                            <ul style="margin: 5px 0 0 20px; color: var(--soul-blue);">
+                                <li>Task ${startTask}: Initial implementation</li>
+                                <li>Task ${startTask + 1}: Testing and validation</li>
+                                <li>Task ${startTask + 2}: Documentation</li>
+                                <li>Task ${startTask + 3}: Integration</li>
+                            </ul>
+                        </div>
                         <div class="task-deliverable">${deliverable}</div>
                         <div class="task-value-explanation">
-                            💰 Value: $${revenue} - Contributes to ${getRevenueStream(task)} revenue stream
+                            💰 Value: $${revenue} - Contributes to ${getRevenueStream(issue)} revenue stream
                         </div>
                         <div class="task-labels">
                             <span class="task-label xp">+${xp} XP</span>
                             <span class="task-label coins">+${coins} Coins</span>
                             <span class="task-label revenue">$${revenue} value</span>
-                            ${task.labels.map(label => 
+                            <span class="task-label" style="background: linear-gradient(135deg, var(--abstract-purple), var(--garden-gold));">
+                                🔮 Unlocks Memory #${issueNum}
+                            </span>
+                            ${issue.labels.map(label => 
                                 !label.name.includes('xp-') && 
                                 !label.name.includes('coins-') && 
                                 label.name !== 'sprint-1'
